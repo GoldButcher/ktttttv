@@ -276,10 +276,8 @@
             itemsShow(trs, (page - 1) * num, page * num - 1);
     };
     $("#prevPage").click(function () {
-        var pageNum = $("#pageNum").attr('data-pageNum');
-        if (pageNum === 1) {
-        }
-        else {
+        var pageNum = parseInt($("#pageNum").attr('data-pageNum'));
+        if (pageNum > 1) {
             $("#pageNum").attr('data-pageNum', pageNum - 1);
             $("#pageNumber").html(pageNum - 1);
             paging(pageNum - 1, num);
@@ -360,7 +358,7 @@
     });
     $("#bookStatus").change(function () {
         var bs = $(this).val();
-        if (bs == 2)
+        if (bs === 2)
             $("#paySelect").removeAttr('disabled');
         else {
             $("#paySelect").val(0).attr('disabled', 'disabled');
