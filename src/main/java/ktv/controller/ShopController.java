@@ -4,6 +4,7 @@ import ktv.dto.CommonResponseDto;
 import ktv.model.Shop;
 import ktv.service.IShopService;
 import ktv.util.CommonResponseUtil;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,11 +27,10 @@ public class ShopController {
      * @return:ktv.dto.CommonResponseDto
      * @date:2017/1/2 14:35
      **/
-    @RequestMapping(value = "/shopInfo",method = RequestMethod.GET)
-    public CommonResponseDto getShopInfo()
-    {
+    @RequestMapping(value = "/shopInfo", method = RequestMethod.GET)
+    public CommonResponseDto getShopInfo() {
         List<Shop> shops = shopService.getAll();
-        if(0 == shops.size())
+        if (0 == shops.size())
             return CommonResponseUtil.shopNotExist();
         else
             return CommonResponseUtil.successWithObj(shops.get(0));
@@ -42,11 +42,10 @@ public class ShopController {
      * @return:ktv.dto.CommonResponseDto
      * @date:2017/1/2 20:51
      **/
-    @RequestMapping(value = "/shopInfo",method = RequestMethod.POST)
-    public CommonResponseDto updateShopInfo(Shop shop)
-    {
+    @RequestMapping(value = "/shopInfo", method = RequestMethod.POST)
+    public CommonResponseDto updateShopInfo(Shop shop) {
         List<Shop> shops = shopService.getAll();
-        if(0 == shops.size())
+        if (0 == shops.size())
             return CommonResponseUtil.shopNotExist();
         else {
             Shop oldshop = shops.get(0);
@@ -56,6 +55,7 @@ public class ShopController {
             oldshop.setLocation(shop.getLocation());
             oldshop.setShopNO(shop.getShopNO());
             oldshop.setWeixin(shop.getWeixin());
+            oldshop.setCompanyName(shop.getCompanyName());
             shopService.update(oldshop);
         }
         return CommonResponseUtil.successWithNull();
@@ -67,12 +67,11 @@ public class ShopController {
      * @return:ktv.dto.CommonResponseDto
      * @date:2016/12/29 22:13
      **/
-    @RequestMapping(value = "/getAboutUs",method = RequestMethod.GET)
-    public CommonResponseDto getAboutUs(HttpServletRequest request)
-    {
+    @RequestMapping(value = "/getAboutUs", method = RequestMethod.GET)
+    public CommonResponseDto getAboutUs(HttpServletRequest request) {
         List<Shop> shops = shopService.getAll();
-        if(0 == shops.size())
-        return CommonResponseUtil.shopNotExist();
+        if (0 == shops.size())
+            return CommonResponseUtil.shopNotExist();
 
         return CommonResponseUtil.successWithObj(shops.get(0).getAboutUs());
 
@@ -84,13 +83,29 @@ public class ShopController {
      * @return:ktv.dto.CommonResponseDto
      * @date:2017/1/2 14:30
      **/
-    @RequestMapping(value = "/getDescription",method = RequestMethod.GET)
-    public CommonResponseDto getDescription(HttpServletRequest request)
-    {
+    @RequestMapping(value = "/getDescription", method = RequestMethod.GET)
+    public CommonResponseDto getDescription(HttpServletRequest request) {
         List<Shop> shops = shopService.getAll();
-        if(0 == shops.size())
+        if (0 == shops.size())
             return CommonResponseUtil.shopNotExist();
-        return  CommonResponseUtil.successWithObj(shops.get(0).getDescription());
+        return CommonResponseUtil.successWithObj(shops.get(0).getDescription());
+    }
+
+    /**
+     * @title:存储公司信息
+     * @user:admin
+     * @return:@return:ktv.dto.CommonResponseDto
+     * @date:2017/4/8 19:51
+     **/
+
+    @PostMapping("/saveShopInfo")
+    public CommonResponseDto saveShopInfo(Shop shop) {
+        List<Shop> shops = shopService.getAll();
+        if (shops.size() != 0)
+            updateShopInfo(shop);
+        else
+            shopService.saveShop(shop);
+        return CommonResponseUtil.successWithNull();
     }
 
 }

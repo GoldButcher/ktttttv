@@ -32,18 +32,21 @@ public class Shop {
     //about about shop information
     private String aboutUs;
 
+    private String companyName;
+
     public Shop() {
     }
 
-    public Shop(String shopNO, String location, String fixLinePhone, String weixin, String description,String aboutUs) {
+    public Shop(Integer id, String shopNO, String location, String fixLinePhone, String weixin, String description, String aboutUs, String companyName) {
+        this.id = id;
         this.shopNO = shopNO;
         this.location = location;
         this.fixLinePhone = fixLinePhone;
         this.weixin = weixin;
         this.description = description;
         this.aboutUs = aboutUs;
+        this.companyName = companyName;
     }
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -95,8 +98,19 @@ public class Shop {
         this.fixLinePhone = fixLinePhone;
     }
 
-    public String getAboutUs() {return aboutUs;}
+    public String getAboutUs() {
+        return aboutUs;
+    }
 
-    public void setAboutUs(String aboutUs) {this.aboutUs = aboutUs;}
+    public void setAboutUs(String aboutUs) {
+        this.aboutUs = aboutUs;
+    }
 
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
 }
