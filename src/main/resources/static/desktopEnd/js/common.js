@@ -14,6 +14,18 @@ $.nav = function (url) {
             sessionStorage.setItem('bt', 4);
             $.nav("navBoxType");
             break;
+        case 'vluxBox':
+            $.nav('viewBoxList');
+            break;
+        case 'vsmlBox':
+            $.nav('viewBoxList');
+            break;
+        case 'vmidBox':
+            $.nav('viewBoxList');
+            break;
+        case 'vbigBox':
+            $.nav('viewBoxList');
+            break;
         case 'luxBox':
             sessionStorage.setItem('bt', 1);
             $.nav("navBoxType");
@@ -37,6 +49,5 @@ $(".sidebarMenu ul li").click(function () {
     $(this).addClass("active");
     $(this).siblings().removeClass("active");
 });
-
 
 

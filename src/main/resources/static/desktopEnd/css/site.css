@@ -184,10 +184,14 @@ label {
     margin-top: 50px;
 }
 
-.addBoxesType{
+.addBoxesType {
     margin-top: 30px;
 }
 
-.companyInfo>.form-group{
+.companyInfo > .form-group {
     margin-top: 50px;
+}
+
+.boxType {
+    margin-bottom: 30px;
 }
