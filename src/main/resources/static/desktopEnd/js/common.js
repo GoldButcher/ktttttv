@@ -18,9 +18,9 @@ $.nav = function (url) {
             sessionStorage.setItem('bt', 1);
             $.nav("navBoxType");
             break;
-        case 'aboutUs':
+        case 'about':
             sessionStorage.setItem('info', 2);
-            $.nav("editShopInfo");
+            $.nav("aboutUs");
             break;
         case 'shoptDescription':
             sessionStorage.setItem('info', 1);
