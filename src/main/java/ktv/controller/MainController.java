@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index() {
+        int i;
         return new ModelAndView("redirect:/desktopEnd/index.html");
     }
 }
