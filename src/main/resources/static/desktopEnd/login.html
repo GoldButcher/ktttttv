@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>后台管理系统登录</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        header {
+            height: 50px;
+            background-color: #5BC0DE;
+        }
+        .login-alert{
+            position: absolute!important;
+            width: 30%;
+            top: -100px;
+            margin: 0 35%;
+            text-align: center;
+            background-color: #b94a48;
+            border-color: #b94a48;
+            border-radius: 0;
+            color: #fff;
+            display: none;
+            min-width: 148px;
+        }
+        .form-horizontal {
+            position: relative;
+            margin-top: 100px;
+        }
+
+        .form-group {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+<header></header>
+<form class="form-horizontal">
+    <div class="alert alert-danger login-alert" style="position: relative" role="alert"></div>
+    <div class="form-group">
+        <h1 class="col-sm-offset-4 col-sm-4" align="center">KTV后台管理系统</h1>
+    </div>
+    <div class="form-group">
+        <label for="ManageAccount" class="col-sm-4 control-label">管理员账号</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="ManageAccount" placeholder="账号">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="ManagerPassword" class="col-sm-4 control-label">管理员密码</label>
+        <div class="col-sm-4">
+            <input type="password" class="form-control" id="ManagerPassword" placeholder="密码" autocomplete="new-password">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-4">
+            <button type="button" id="loginBtn" class="btn btn-default btn-block btn-info">Sign in</button>
+        </div>
+    </div>
+</form>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+body {
+    font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+    border-radius: 0;
+    margin-bottom: 0;
+    min-width: 500px;
+}
+
+.sidebarMenu {
+    min-width: 180px;
+    background-color: #E6ECF6;
+    height: 100vh;
+    padding-top: 60px;
+    display: inline-block;
+}
+
+ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+.sidebarMenu li {
+    list-style: none;
+    height: 32px;
+    line-height: 32px;
+
+}
+
+.sidebarMenu li > a {
+    color: #222222;
+    text-decoration: none;
+    padding-left: 25px;
+    display: inline-block;
+    width: 100%;
+}
+
+#mainContent {
+    margin-top: 50px;
+    width: 100%;
+    min-width: 800px;
+}
+
+.active {
+    background: #4B4D4F;
+}
+
+.active a {
+    color: #ffffff !important;
+}
+
+#mainBody {
+    display: -webkit-flex;
+    display: flex;
+}
+
+.breadcrumb {
+    width: 100%;
+}
+
+.boxType {
+    width: 100%;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.boxType > div {
+    border: 2px solid #E6ECF6;
+    margin-right: 5%;
+    width: 20%;
+    text-align: center;
+    height: 150px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.boxType > div:first-child {
+    margin-left: 5%;
+}
+
+.boxType > div > a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.boxType > div .glyphicon-home, .boxType > div .glyphicon-edit {
+    font-size: 40px;
+    color: #8CC3EA;
+}
+
+.boxType > div:hover {
+    background-color: #f5f5f5;
+}
+
+.boxListHead {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 15px;
+}
+
+.boxListHead > div > a {
+    margin-left: 10px;
+    color: #000;
+}
+
+.boxListHead > div > input[placeholder='Search'] {
+    border: 1px #a3a3a3 solid;
+    border-right: none;
+    outline: none;;
+}
+
+.search-btn {
+    margin-left: -4px;
+    background-color: #fff;
+    border: 1px #a3a3a3 solid;
+    border-left: none;
+    outline: none;
+    margin-right: 15px;
+}
+
+.boxListBody {
+    padding: 0 15px 15px;
+}
+
+.filterBoxList {
+    padding-right: 15px;
+}
+
+input[type='date'] {
+    height: 26px;
+}
+
+select {
+    background-color: #fff;
+    height: 26px;
+}
+
+label {
+    margin-left: 30px;
+}
+
+.boxPagination {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.boxPagination ul {
+    display: flex;
+}
+
+.boxPagination ul li {
+    list-style: none;
+}
+
+.boxPagination ul li a {
+    text-decoration: none;
+    color: #000;;
+}
+
+.boxPagination > span {
+    margin-right: 20px;
+}
+
+.boxPagination > ul > li {
+    margin-right: 15px;
+}
+
+#btn-search {
+    height: 26px;
+    width: 52px;
+    line-height: 26px;
+    text-align: center;
+    margin-left: 30px;
+    margin-top: -6px;
+}
+
+#paySelect[disabled='disabled'] {
+    color: #e3e3e3;
+}
+
+.addBoxType > .form-group {
+    margin-top: 50px;
+}
+
+.addBoxesType{
+    margin-top: 30px;
+}
+
+.companyInfo>.form-group{
+    margin-top: 50px;
+}

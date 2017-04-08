@@ -1,0 +1,147 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>订单详情</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport"/>
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="assets/css/amazeui.min.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <style>
+        body {
+            background-color: #ECECEC;
+        }
+
+        .am-accordion-title {
+            display: none;
+        }
+
+        .am-accordion-title::before {
+            display: none !important;
+        }
+
+        .am-accordion-content {
+            background-color: #fff;
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 1rem !important;
+        }
+
+        button {
+            background-color: #2CAF00 !important;
+            color: #FFFFFF !important;
+            width: 100%;
+        }
+
+        .ycy-title {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+        }
+
+        .boox {
+            font-weight: 500;
+            background-color: #2CAF00;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            border-radius: 1rem;
+            color: #ffffff !important;
+        }
+
+        .btn-delete {
+            background-color: #CA3C38 !important;
+        }
+
+    </style>
+</head>
+<body>
+<div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{&quot;directionNav&quot;:false}'>
+    <ul class="am-slides">
+        <li>
+            <img src="assets/img/82067743.jpg">
+        </li>
+        <li>
+            <img src="assets/img/1096755635.jpg">
+        </li>
+        <li>
+            <img src="assets/img/2013162648.jpg">
+        </li>
+        <li>
+            <img src="assets/img/2110917952.jpg">
+        </li>
+    </ul>
+</div>
+
+<section data-am-widget="accordion" class="am-accordion am-accordion-default" data-am-accordion='{ "multiple": true }'>
+    <dl class="am-accordion-item">
+        <dt class="ycy-title">
+            <span>订单详情</span>
+        </dt>
+        <dd class="am-accordion-bd am-collapse am-in">
+            <div class="am-accordion-content">
+                <span>订单时间</span>
+                <span>2017-01-15</span>
+            </div>
+        </dd>
+    </dl>
+    <dl class="am-accordion-item">
+        <dt class="am-accordion-title">
+        </dt>
+        <dd class="am-accordion-bd am-collapse am-in ">
+            <div class="am-accordion-content">
+                <span>包厢类型</span>
+                <span>大包厢</span>
+            </div>
+        </dd>
+    </dl>
+    <dl class="am-accordion-item">
+        <dt class="am-accordion-title">
+        </dt>
+        <dd class="am-accordion-bd am-collapse am-in">
+            <div class="am-accordion-content">
+                <span>价格</span>
+                <span>￥80</span>
+            </div>
+        </dd>
+    </dl>
+    <dl class="am-accordion-item">
+        <dt class="am-accordion-title">
+        </dt>
+        <dd class="am-accordion-bd am-collapse am-in">
+            <div class="am-accordion-content">
+                <span>包厢号</span>
+                <span>777</span>
+            </div>
+        </dd>
+    </dl>
+    <dl class="am-accordion-item">
+        <dt class="am-accordion-title">
+        </dt>
+        <dd class="am-accordion-bd am-collapse am-in">
+            <div class="am-accordion-content">
+                <span>手机号</span>
+                <span>777777777</span>
+            </div>
+        </dd>
+    </dl>
+</section>
+<section data-am-widget="accordion" class="am-accordion am-accordion-default aa-back"
+         data-am-accordion='{ "multiple": true }'>
+    <button class="am-btn am-btn-default btn-back">返回上页</button>
+</section>
+<section data-am-widget="accordion" class="am-accordion am-accordion-default aa-delete"
+         data-am-accordion='{ "multiple": true }'>
+    <button class="am-btn am-btn-default btn-delete">取消订单</button>
+</section>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/amazeui.min.js"></script>
+<script>
+    $(".btn-back").on('click', function () {
+        location.href = 'history.html';
+    })
+</script>
+</body>
+</html>

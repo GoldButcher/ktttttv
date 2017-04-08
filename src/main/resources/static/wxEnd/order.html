@@ -1,0 +1,128 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>在线预定</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport"/>
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="assets/css/amazeui.min.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <style>
+        body {
+            background-color: #ECECEC;
+        }
+
+        .am-accordion-title {
+            display: none;
+        }
+
+        .am-accordion-title::before {
+            display: none !important;
+        }
+
+        .am-accordion-content {
+            background-color: #fff;
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 1rem !important;
+        }
+
+        .am-accordion-content > span:last-child {
+            color: #FB9A50;
+        }
+
+        button {
+            background-color: #2CAF00 !important;
+            color: #FFFFFF !important;
+            width: 100%;
+        }
+
+        .ycy-title {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+        }
+
+        .boox {
+            font-weight: 500;
+            background-color: #2CAF00;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            border-radius: 1rem;
+            color: #ffffff !important;
+        }
+
+        input[readonly] {
+            outline: none;
+        }
+
+        .btn-back {
+            background-color: #CA3C38 !important;
+            color: #ffffff !important;
+
+        }
+    </style>
+</head>
+<body>
+
+
+<form class="am-form">
+    <fieldset>
+        <legend>在线订单</legend>
+        <div class="am-form-group">
+            <label for="boxType">包厢类型</label>
+            <input type="text" class="" id="boxType" readonly value="豪华包厢">
+        </div>
+        <div class="am-form-group">
+            <label for="userName">订购人</label>
+            <input type="text" class="" id="userName" placeholder="请输入您的姓名">
+        </div>
+        <div class="am-form-group">
+            <label for="mobilePhone">手机号</label>
+            <input type="tel" class="" id="mobilePhone" placeholder="请输入手机号">
+        </div>
+
+        <div class="am-form-group">
+            <label for="bookDate">预定日期</label>
+            <input type="date" id="bookDate">
+        </div>
+        <div class="am-form-group">
+            <label for="doc-ta-1">备注</label>
+            <textarea class="" rows="5" id="doc-ta-1"></textarea>
+        </div>
+        <p>
+            <button type="submit" class="am-btn am-btn-default">提交</button>
+        </p>
+    </fieldset>
+</form>
+<section data-am-widget="accordion" class="am-accordion am-accordion-default aa-back"
+         data-am-accordion='{ "multiple": true }'>
+    <button class="am-btn am-btn-default btn-back">取消预定</button>
+</section>
+<div class="am-modal am-modal-confirm" tabindex="-1" id="my-confirm">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">订单详情</div>
+        <div class="am-modal-bd">
+            确定要取消吗？
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+            <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+        </div>
+    </div>
+</div>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/amazeui.min.js"></script>
+<script>
+    $(".history").on('click', function () {
+        location.href = 'history.html';
+    });
+    $(".btn-back").on('click', function () {
+        location.href = 'index.html';
+    })
+</script>
+</body>
+</html>

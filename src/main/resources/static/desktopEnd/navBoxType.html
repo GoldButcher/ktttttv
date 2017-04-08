@@ -1,0 +1,14 @@
+<ol class="breadcrumb" id="listAppendTo">
+    <li><a href="javascript:void(0)">主菜单</a></li>
+    <li><a href="javascript:$.nav('boxManage')">包厢类别管理</a></li>
+    <li id="boxTypeName"></li>
+</ol>
+
+<script>
+    var boxTypeNames = ["豪华包厢", "大包厢", "中包厢", "小包厢"];
+    $("#boxTypeName").html(boxTypeNames[sessionStorage.getItem('bt') - 1]).attr('data-ti', sessionStorage.getItem('bt'));
+    sessionStorage.removeItem('bt');
+    $.get("boxTypeContent.html").success(function (html) {
+        $("#listAppendTo").after(html);
+    })
+</script>

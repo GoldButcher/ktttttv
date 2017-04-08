@@ -1,0 +1,153 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>包厢详情</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport"/>
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="assets/css/amazeui.min.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <style>
+        body {
+            background-color: #ECECEC;
+        }
+
+        .am-accordion-title {
+            display: none;
+        }
+
+        .am-accordion-title::before {
+            display: none !important;
+        }
+
+        .am-accordion-content {
+            background-color: #fff;
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 1rem !important;
+        }
+
+        button {
+            background-color: #2CAF00 !important;
+            color: #FFFFFF !important;
+            width: 100%;
+        }
+
+        .ycy-title {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+        }
+
+        .boox {
+            font-weight: 500;
+            background-color: #2CAF00;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            border-radius: 1rem;
+            color: #ffffff !important;
+        }
+
+        .am-icon-plus {
+            margin-right: 1rem;
+        }
+
+        .bookNow {
+            font-weight: 500;
+            background-color: #FB9A50;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            color: #ffffff !important;
+        }
+
+        .price {
+            color: #B72201;
+        }
+    </style>
+</head>
+<body>
+<div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{&quot;directionNav&quot;:false}'>
+    <ul class="am-slides">
+        <li>
+            <img src="assets/img/82067743.jpg">
+        </li>
+        <li>
+            <img src="assets/img/1096755635.jpg">
+        </li>
+        <li>
+            <img src="assets/img/2013162648.jpg">
+        </li>
+        <li>
+            <img src="assets/img/2110917952.jpg">
+        </li>
+    </ul>
+</div>
+
+<section data-am-widget="accordion" class="am-accordion am-accordion-default" data-am-accordion='{ "multiple": true }'>
+    <dl class="am-accordion-item am-active ">
+        <dt class="ycy-title">
+            <span>包厢预定</span>
+        </dt>
+        <dd class="am-accordion-bd am-collapse am-in">
+            <div class="am-accordion-content">
+                <span class="price">￥80元</span>
+                <span class="bookNow">立即预定</span>
+            </div>
+        </dd>
+    </dl>
+</section>
+<section data-am-widget="accordion" class="am-accordion am-accordion-default" data-am-accordion='{ "multiple": true }'>
+    <dl class="am-accordion-item am-active ">
+        <dt class="ycy-title">
+            <span>包厢介绍</span>
+        </dt>
+        <dd class="am-accordion-bd am-collapse am-in">
+            <div class="am-accordion-content">
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+                介绍 <br>
+            </div>
+        </dd>
+    </dl>
+</section>
+<section data-am-widget="accordion" class="am-accordion am-accordion-default aa-back"
+         data-am-accordion='{ "multiple": true }'>
+    <button class="am-btn am-btn-default btn-back">返回上页</button>
+</section>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/amazeui.min.js"></script>
+<script>
+    $(".bookNow").on('click', function () {
+        location.href = 'order.html';
+    });
+    $(".btn-back").on('click', function () {
+        location.href = 'index.html';
+    })
+</script>
+</body>
+</html>

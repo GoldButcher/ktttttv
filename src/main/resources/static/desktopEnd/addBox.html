@@ -1,0 +1,43 @@
+<ol class="breadcrumb">
+    <li><a href="javascript:void(0)">主菜单</a></li>
+    <li>添加包厢</li>
+</ol>
+<form class="form-horizontal addBoxType">
+    <div class="form-group">
+        <label for="addBoxNum" class="col-sm-3 control-label">包厢编号</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="addBoxNum" placeholder="添加包厢编号">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="addBoxName" class="col-sm-3 control-label">包厢名字</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="addBoxName" placeholder="添加包厢名字">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="addBoxStatus" class="col-sm-3 control-label">包厢状态</label>
+        <div class="col-sm-6">
+            <select name="status" id="addBoxStatus" class="form-control">
+                <option value="1">可营业</option>
+                <option value="2">不可营业</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="addBoxType" class="col-sm-3 control-label">选择包厢类型</label>
+        <div class="col-sm-6">
+            <select name="addBoxType" id="addBoxType" class="form-control">
+                <option value="1">豪华包厢</option>
+                <option value="2">大包厢</option>
+                <option value="3">中包厢</option>
+                <option value="4">小包厢</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-6">
+            <button type="button" class="btn btn-success">提交</button>
+        </div>
+    </div>
+</form>
