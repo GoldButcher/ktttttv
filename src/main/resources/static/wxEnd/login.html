@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>欢迎使用请登录</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport"/>
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="assets/css/amazeui.min.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+
+</head>
+<style>
+body{
+    background-color: Rgb(240,240,240);
+}
+input{
+    border:none!important;
+    outline: none!important;
+}
+label{
+    height:16px;
+    line-height: 16px;
+    font-weight: 400;
+    font-size: 1em;
+}
+    .am-form-group{
+        background-color: #FFFFFF;
+    }
+</style>
+<body>
+<form method="post" class="am-form am-form-horizontal" style="padding-top: 100px">
+    <div class="am-form-group">
+        <label for="doc-ipt-1" class="am-u-sm-3 am-form-label">手机号</label>
+        <div class="am-u-sm-9">
+            <input type="text" id="doc-ipt-1" class="mobile" placeholder="输入你的手机号" >
+        </div>
+    </div>
+    <div class="am-form-group">
+        <label for="doc-ipt-2" class="am-u-sm-3 am-form-label" style="padding-top: 0.2em"><button class="am-btn am-btn-danger am-btn-xs" id="getCheck">获取验证码</button></label>
+        <div class="am-u-sm-9">
+            <input type="text" id="doc-ipt-2" class="checkCode">
+        </div>
+    </div>
+    <div class="am-form-group" style="margin-top: 40px">
+        <div class="am-g am-g-collapse am-g-fixed">
+            <div class="am-u-sm-12 am-u-lg-12">
+                <button type="button" class="am-btn am-btn-primary am-btn-xl"
+                        style="width: 100%" disabled id="logBtn">登陆</button>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="assets/js/jquery.min.js"></script>
+<script src="login.js"></script>
+</body>
+</html>
