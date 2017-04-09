@@ -55,11 +55,32 @@
     </div>
     <div class="form-group">
         <div class="col-sm-offset-6">
-            <button type="button" class="btn btn-success">提交</button>
+            <button type="button" class="btn btn-success" id="addBoxBtn">提交</button>
         </div>
     </div>
 </form>
 
 <script>
-
+    $(document).ready(function () {
+        $("#addBoxBtn").click(
+            function () {
+                $.post("/addBoxInfo", {
+                    'boxNo': $("#addBoxNum").val(),
+                    'boxName': $("#addBoxName").val(),
+                    'status': $("#addBoxStatus").val(),
+                    'description': $("#addBoxDesc").val(),
+                    'notice': $("#addBoxNotice").val(),
+                    'boxTypeId': $("#addBoxType").val()
+                }).success(function (data) {
+                    if (data.result === 'success')
+                        alert("添加成功");
+                    else {
+                        alert("添加失败");
+                    }
+                }).fail(function () {
+                    alert("添加失败");
+                })
+            }
+        )
+    })
 </script>
