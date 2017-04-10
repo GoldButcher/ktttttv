@@ -1,0 +1,103 @@
+<ol class="breadcrumb">
+    <li><a href="javascript:void(0)">主菜单</a></li>
+    <li>修改包厢</li>
+</ol>
+<form class="form-horizontal addBoxType">
+    <div class="form-group">
+        <label for="addBoxNum" class="col-sm-3 control-label">包厢编号</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="addBoxNum" placeholder="添加包厢编号">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="addBoxName" class="col-sm-3 control-label">包厢名字</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="addBoxName" placeholder="添加包厢名字">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="addBoxPrice" class="col-sm-3 control-label">包厢价格</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="addBoxPrice" placeholder="添加包厢价格">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="addBoxDesc" class="col-sm-3 control-label">包厢描述</label>
+        <div class="col-sm-6">
+            <textarea cols="5" class="form-control" id="addBoxDesc" placeholder="添加包厢描述"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="addBoxNotice" class="col-sm-3 control-label">注意事项</label>
+        <div class="col-sm-6">
+            <textarea cols="5" class="form-control" id="addBoxNotice" placeholder="添加注意事项"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="addBoxStatus" class="col-sm-3 control-label">包厢状态</label>
+        <div class="col-sm-6">
+            <select name="status" id="addBoxStatus" class="form-control">
+                <option value="1">可营业</option>
+                <option value="0">不可营业</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="addBoxType" class="col-sm-3 control-label">选择包厢类型</label>
+        <div class="col-sm-6">
+            <select name="addBoxType" id="addBoxType" class="form-control">
+                <option value="1">豪华包厢</option>
+                <option value="2">大包厢</option>
+                <option value="3">中包厢</option>
+                <option value="4">小包厢</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-6">
+            <button type="button" class="btn btn-success" id="editBoxBtn">提交</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    function loadBox(eb) {
+        $.get("/getBoxInfo", {boxInfoId: eb}).success(function (box) {
+            $("#addBoxNum").val(box.boxNo);
+            $("#addBoxName").val(box.boxName);
+            $("#addBoxStatus").val(box.status);
+            $("#addBoxPrice").val(box.price);
+            $("#addBoxDesc").val(box.boxInfoDescription);
+            $("#addBoxNotice").val(box.notice);
+            $("#addBoxType").val(box.boxTypeId)
+        });
+    }
+    $(document).ready(function () {
+        var eb = loadBox(sessionStorage.getItem('eb'));
+        loadBox(eb);
+        $("#editBoxBtn").click(
+            function () {
+                $.post("/editBoxInfo", {
+                    'boxInfoId': sessionStorage.getItem('eb'),
+                    'boxNo': $("#addBoxNum").val(),
+                    'boxName': $("#addBoxName").val(),
+                    'status': $("#addBoxStatus").val(),
+                    'price': $("#addBoxPrice").val(),
+                    'description': $("#addBoxDesc").val(),
+                    'notice': $("#addBoxNotice").val(),
+                    'boxTypeId': $("#addBoxType").val()
+                }).success(function (data) {
+                    if (data.result === 'success') {
+                        alert("修改成功");
+                        loadBox(sessionStorage.getItem('eb'));
+                    }
+                    else {
+                        alert("修改失败");
+                    }
+                }).fail(function () {
+                    alert("修改失败");
+                })
+            }
+        )
+    })
+</script>

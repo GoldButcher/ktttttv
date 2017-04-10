@@ -35,7 +35,7 @@
         var arrBoxType = ['豪华包厢', '大包厢', '中包厢', '小包厢'];
         var $tr = $('<tr></tr>');
         $tr.append($('<td></td>').html(index + base));
-        $tr.append($("<td></td>>").html(value.boxNo));
+        $tr.append($("<td></td>").html(value.boxNo));
         $tr.append($("<td></td>").html(value.boxInfoDescription));
         $tr.append($("<td></td>").html(arrBoxType[value.boxTypeId - 1]));
         $tr.append($("<td></td>").html(value.notice));
@@ -62,44 +62,53 @@
         $tr.append($("<td></td>").append(btn));
         var delBtn = $("<button class='btn btn-sm btn-danger'></button>").html('删除');
         delBtn.click(function () {
-            $.post("/delBoxInfo",{id:value.boxInfoId}).success(function () {
+            $.post("/delBoxInfo", {id: value.boxInfoId}).success(function () {
                 var cur = $("#pageNumber").attr("data-curPage");
                 loadBoxList(cur);
             })
         });
         $tr.append($("<td></td>").append(delBtn));
-        $tr.append($("<td></td>").append($("<button class='btn btn-sm btn-info'></button>").html('编辑')));
+        var editBtn = $("<button class='btn btn-sm btn-info'></button>").html('编辑');
+        editBtn.click(function () {
+            sessionStorage.setItem('eb', value.boxInfoId);
+            $.nav('editBox');
+        });
+        $tr.append($("<td></td>").append(editBtn));
         return $tr;
     }
     function loadBoxList(pageNum) {
-        $('tbody').empty();
         var boxType = sessionStorage.getItem('vt');
-        var itemNumber = 10;
+        var itemNumber = 15;
         $.get("/getBoxListPaging/" + boxType + '/' + pageNum + '/' + itemNumber)
             .success(function (boxList) {
-                boxList.forEach(function (value, index, arr) {
-                    $('tbody').append(generateItem(index, value, pageNum * 15 - 15));
-                })
-            })
+                    if (boxList.length > 0) {
+                        $('tbody').empty();
+                        boxList.forEach(function (value, index, arr) {
+                            $('tbody').append(generateItem(index, value, pageNum * 15 - 15));
+                        });
+                        var cur = parseInt($("#pageNumber").attr("data-curpage"));
+                        if (pageNum > cur && boxList.length !== 0) {
+                            $("#pageNumber").attr("data-curpage", pageNum);
+                        }
+                    }
+                }
+            )
             .fail(function () {
                 alert("网络异常");
-            })
+            });
     }
     $(document).ready(function () {
-        $("#pageNumber").attr("data-curPage", 1);
+        $("#pageNumber").attr("data-curpage", 1);
         $("#prevPage").click(function () {
-            var cur = parseInt($("#pageNumber").attr("data-curPage"));
+            var cur = parseInt($("#pageNumber").attr("data-curpage"));
             if (cur > 1) {
                 loadBoxList(cur - 1);
-                $("#pageNumber").attr("data-curPage", cur - 1);
+                $("#pageNumber").attr("data-curpage", cur - 1);
             }
         });
-
         $("#nextPage").click(function () {
-            var cur = parseInt($("#pageNumber").attr("data-curPage"));
-            loadBoxList(cur+1);
-            if ($("tr").length>1)
-                $("#pageNumber").attr("data-curPage", cur + 1);
+            var cur = parseInt($("#pageNumber").attr("data-curpage"));
+            loadBoxList(cur + 1);
         });
     });
     loadBoxList(1);

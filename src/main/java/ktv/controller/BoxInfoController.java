@@ -64,6 +64,7 @@ public class BoxInfoController {
         oldBoxInfo.setBoxName(boxInfo.getBoxName());
         oldBoxInfo.setBoxTypeId(boxInfo.getBoxTypeId());
         oldBoxInfo.setBoxNo(boxInfo.getBoxNo());
+        oldBoxInfo.setPrice(boxInfo.getPrice());
         oldBoxInfo.setNotice(boxInfo.getNotice());
         oldBoxInfo.setStatus(boxInfo.getStatus());
         boxInfoService.update(boxInfo);
@@ -78,7 +79,6 @@ public class BoxInfoController {
      **/
     @RequestMapping(value = "/getBoxInfo", method = RequestMethod.GET)
     public BoxInfoDto getBoxInfo(int boxInfoId) {
-        Assert.notNull(boxInfoId);
         return boxInfoService.getBoxInfo(boxInfoId);
     }
 
