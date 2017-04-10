@@ -3,252 +3,104 @@
     <li>查看包厢</li>
     <li id="viewBoxType"></li>
 </ol>
+<div class="boxListBody">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>包厢编号</th>
+            <th>包厢描述</th>
+            <th>包厢类型</th>
+            <th>注意事项</th>
+            <th>包厢状态</th>
+            <th>删除包厢</th>
+            <th>修改包厢</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<nav class="boxPagination">
+    <span>每页显示15条</span>
+    <span id="pageNum"><span id="pageNumber"></span></span>
+    <ul>
+        <li><a href="javascript:void (0)" id="prevPage">上一页</a></li>
+        <li><a href="javascript:void (0)" id="nextPage">下一页</a></li>
+    </ul>
+</nav>
+<script>
+    function generateItem(index, value, base) {
+        var arrStatus = ['禁止', '启用'];
+        var arrBoxType = ['豪华包厢', '大包厢', '中包厢', '小包厢'];
+        var $tr = $('<tr></tr>');
+        $tr.append($('<td></td>').html(index + base));
+        $tr.append($("<td></td>>").html(value.boxNo));
+        $tr.append($("<td></td>").html(value.boxInfoDescription));
+        $tr.append($("<td></td>").html(arrBoxType[value.boxTypeId - 1]));
+        $tr.append($("<td></td>").html(value.notice));
+        var btn = $("<button class='btn btn-sm btn-status'></button>");
+        if (value.status === 1)
+            btn.addClass('btn-default').html(arrStatus[value.status - 0]);
+        else if (value.status === 0)
+            btn.addClass('btn-danger').html(arrStatus[value.status - 0]);
 
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th>#</th>
-        <th>包厢编号</th>
-        <th>包厢状态</th>
-        <th>包厢价格</th>
-        <th>包厢描述</th>
-        <th>注意事项</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    </tr>
-    <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-    </tr>
-    </tbody>
-</table>
+        btn.click(function () {
+            if (btn.html() === '禁用') {
+                $.post("/changeBoxStatus/" + value.boxInfoId).success(function () {
+                    btn.removeClass('btn-danger').addClass('btn-default');
+                    btn.html('启用');
+                });
+            }
+            else if (btn.html() === '启用') {
+                $.post("/changeBoxStatus/" + value.boxInfoId).success(function () {
+                    btn.addClass('btn-danger').removeClass('btn-default');
+                    btn.html('禁用');
+                });
+            }
+        });
+        $tr.append($("<td></td>").append(btn));
+        var delBtn = $("<button class='btn btn-sm btn-danger'></button>").html('删除');
+        delBtn.click(function () {
+            $.post("/delBoxInfo",{id:value.boxInfoId}).success(function () {
+                var cur = $("#pageNumber").attr("data-curPage");
+                loadBoxList(cur);
+            })
+        });
+        $tr.append($("<td></td>").append(delBtn));
+        $tr.append($("<td></td>").append($("<button class='btn btn-sm btn-info'></button>").html('编辑')));
+        return $tr;
+    }
+    function loadBoxList(pageNum) {
+        $('tbody').empty();
+        var boxType = sessionStorage.getItem('vt');
+        var itemNumber = 10;
+        $.get("/getBoxListPaging/" + boxType + '/' + pageNum + '/' + itemNumber)
+            .success(function (boxList) {
+                boxList.forEach(function (value, index, arr) {
+                    $('tbody').append(generateItem(index, value, pageNum * 15 - 15));
+                })
+            })
+            .fail(function () {
+                alert("网络异常");
+            })
+    }
+    $(document).ready(function () {
+        $("#pageNumber").attr("data-curPage", 1);
+        $("#prevPage").click(function () {
+            var cur = parseInt($("#pageNumber").attr("data-curPage"));
+            if (cur > 1) {
+                loadBoxList(cur - 1);
+                $("#pageNumber").attr("data-curPage", cur - 1);
+            }
+        });
+
+        $("#nextPage").click(function () {
+            var cur = parseInt($("#pageNumber").attr("data-curPage"));
+            loadBoxList(cur+1);
+            if ($("tr").length>1)
+                $("#pageNumber").attr("data-curPage", cur + 1);
+        });
+    });
+    loadBoxList(1);
+</script>
