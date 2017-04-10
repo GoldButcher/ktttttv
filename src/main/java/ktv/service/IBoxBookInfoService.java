@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface IBoxBookInfoService extends AbstractService<Integer,BoxBookInfo>{
 
-    CommonResponseDto bookBox(String date,String boxNo,String weixin,String telephone,int payment);
+    CommonResponseDto bookBox(String date,String boxNo,String weixin,String telephone,int payment,String username,String description);
 
     CommonResponseDto cancelBookBox(String date,String boxNo,String telephone);
 

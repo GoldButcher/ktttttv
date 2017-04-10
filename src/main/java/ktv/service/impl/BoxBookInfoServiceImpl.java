@@ -39,7 +39,7 @@ public class BoxBookInfoServiceImpl extends AbstractServiceimpl<Integer,BoxBookI
     }
 
     @Override
-    public CommonResponseDto bookBox(String date, String boxNo,String weixin,String telephone,int payment) {
+    public CommonResponseDto bookBox(String date, String boxNo,String weixin,String telephone,int payment,String username,String description) {
 
         BoxInfo boxInfo = boxInfoDao.getByProperties("boxNo",boxNo);
         BoxBookInfo boxBookInfo = boxBookInfoDao.getOrder(boxNo,date);
@@ -65,6 +65,8 @@ public class BoxBookInfoServiceImpl extends AbstractServiceimpl<Integer,BoxBookI
         boxBookInfo.setCustomerId(customerId);
         boxBookInfo.setOrderDate(date);
         boxBookInfo.setPayment(payment);
+        boxBookInfo.setUserName(username);
+        boxBookInfo.setDescription(description);
         if(0!=boxBookInfoDao.sava(boxBookInfo))
             return CommonResponseUtil.successWithNull();
         return CommonResponseUtil.errorWithObj("系统错误,请稍后再试");

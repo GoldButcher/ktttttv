@@ -15,15 +15,24 @@ public class BoxType {
     private String description;
     private int boxNum;
     private int leftBoxNum;
-
+    private double price;
     public BoxType() {
     }
 
-    public BoxType(String name, String description, int boxNum, int leftBoxNum) {
+    public BoxType(String name, String description, int boxNum, int leftBoxNum,double price) {
         this.name = name;
         this.description = description;
         this.boxNum = boxNum;
         this.leftBoxNum = leftBoxNum;
+        this.price = price;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     @Id

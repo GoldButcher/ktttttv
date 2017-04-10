@@ -13,12 +13,12 @@ public class BoxInfoDto {
     private Integer boxTypeId;
     private String name;
     private String boxTypeDescription;
-    private double price;
+    private String userName;
+    private String description;
+    public BoxInfoDto(){}
 
-    public BoxInfoDto() {
-    }
 
-    public BoxInfoDto(Integer boxInfoId, String boxNo, String boxName, Integer status, String boxInfoDescription, String notice, Integer boxTypeId, String name, String boxTypeDescription, double price) {
+    public BoxInfoDto(Integer boxInfoId, String boxNo, String boxName, Integer status, String boxInfoDescription, String notice, Integer boxTypeId, String name, String boxTypeDescription, String userName, String description) {
         this.boxInfoId = boxInfoId;
         this.boxNo = boxNo;
         this.boxName = boxName;
@@ -28,7 +28,24 @@ public class BoxInfoDto {
         this.boxTypeId = boxTypeId;
         this.name = name;
         this.boxTypeDescription = boxTypeDescription;
-        this.price = price;
+        this.userName = userName;
+        this.description = description;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Integer getBoxInfoId() {
@@ -101,13 +118,5 @@ public class BoxInfoDto {
 
     public void setBoxTypeDescription(String boxTypeDescription) {
         this.boxTypeDescription = boxTypeDescription;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 }

@@ -34,7 +34,7 @@ public class BoxBookController {
      * @date:2017/1/8 14:57
      **/
     @RequestMapping(value = "/bookBox", method = RequestMethod.POST)
-    public CommonResponseDto bookBox(String date, String boxNo, String weixin, String telephone, int payment) {
+    public CommonResponseDto bookBox(String date, String boxNo, String weixin, String telephone, int payment,String username,String description) {
         return boxBookInfoService.bookBox(date, boxNo, weixin, telephone, payment);
     }
 

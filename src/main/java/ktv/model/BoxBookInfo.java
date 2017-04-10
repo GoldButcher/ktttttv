@@ -13,15 +13,19 @@ public class BoxBookInfo {
     private Integer customerId;
     private Integer boxInfoId;
     private int payment;//付款方式 1.未支付 2.微信 3.现金 4.刷卡
+    private String userName;//下单用户姓名
+    private String description;//订单备注
 
     public BoxBookInfo() {}
 
-    public BoxBookInfo(String orderDate, int status, Integer customerId, int boxInfoId, int payment) {
+    public BoxBookInfo(String orderDate, int status, Integer customerId, int boxInfoId, int payment,String userName,String description) {
         this.orderDate = orderDate;
         this.status = status;
         this.customerId = customerId;
         this.boxInfoId = boxInfoId;
         this.payment = payment;
+        this.userName = userName;
+        this.description = description;
     }
 
     public String getOrderDate() {return orderDate;}
@@ -68,4 +72,20 @@ public class BoxBookInfo {
     public int getPayment() {return payment;}
 
     public void setPayment(int payment) {this.payment = payment;}
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
