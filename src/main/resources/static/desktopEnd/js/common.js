@@ -15,15 +15,19 @@ $.nav = function (url) {
             $.nav("navBoxType");
             break;
         case 'vluxBox':
+            sessionStorage.setItem('vt', 1);
             $.nav('viewBoxList');
             break;
         case 'vsmlBox':
             $.nav('viewBoxList');
+            sessionStorage.setItem('vt', 4);
             break;
         case 'vmidBox':
             $.nav('viewBoxList');
+            sessionStorage.setItem('vt', 3);
             break;
         case 'vbigBox':
+            sessionStorage.setItem('vt', 2);
             $.nav('viewBoxList');
             break;
         case 'luxBox':

@@ -72,7 +72,7 @@ public class BoxInfoDaoImpl extends AbstractDaoImpl<Integer, BoxInfo> implements
     @Override
     public BoxInfoDto getBoxInfo(int boxInfoId) {
         String sql = "select bf.boxInfoId AS boxInfoId,bf.boxNo AS boxNo , bf.boxName AS boxName,bf.status AS status,"
-                + "bf.description AS boxInfoDescription,bf.notice AS notice,bt.boxTypeId AS boxTypeId,"
+                + "bf.description AS boxInfoDescription,bf.notice AS notice,bf.price AS price,bt.boxTypeId AS boxTypeId,"
                 + "bt.name AS name,bt.description AS boxTypeDescription"
                 + " from (BoxInfo bf LEFT OUTER JOIN BoxType bt ON bf.boxTypeId = bt.boxTypeId)"
                 + " WHERE bf.boxInfoId =:boxInfoId";

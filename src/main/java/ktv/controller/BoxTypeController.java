@@ -7,6 +7,7 @@ import ktv.service.IBoxTypeService;
 import ktv.util.CommonResponseUtil;
 import org.springframework.data.geo.Box;
 import org.springframework.util.Assert;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,6 +55,23 @@ public class BoxTypeController {
         boxTypeService.update(oldBoxType);
         return CommonResponseUtil.successWithNull();
     }
+
+    /**
+     * @title:修改包厢描述
+     * @user:amdin
+     * @return:ktv.dto.CommonResponseDto
+     * @date:2017/4/9 10:02
+     **/
+
+    @PostMapping(value = "/updateBoxTypeDescription")
+    public CommonResponseDto updateBoxTypeDesc(int id,String desc){
+        BoxType newBoxType = boxTypeService.getByKey(id);
+        newBoxType.setDescription(desc);
+        boxTypeService.update(newBoxType);
+        return CommonResponseUtil.successWithNull();
+    }
+
+
 
     /**
      * @title:删除包厢类型信息
