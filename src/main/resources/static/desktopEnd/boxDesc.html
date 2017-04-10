@@ -4,9 +4,9 @@
 </ol>
 <form class="form-horizontal addBoxType">
     <div class="form-group">
-        <label for="addBoxType" class="col-sm-3 control-label">选择包厢类型</label>
+        <label for="updateBoxTypeDesc" class="col-sm-3 control-label">选择包厢类型</label>
         <div class="col-sm-6">
-            <select name="addBoxType" id="addBoxType" class="form-control">
+            <select name="addBoxType" id="updateBoxTypeDesc" class="form-control">
                 <option value="1">豪华包厢</option>
                 <option value="2">大包厢</option>
                 <option value="3">中包厢</option>
@@ -17,12 +17,30 @@
     <div class="form-group">
         <label for="addBoxTypeDesc" class="col-sm-3 control-label">包厢描述</label>
         <div class="col-sm-6">
-            <textarea cols="5" class="form-control" id="addBoxTypeDesc" placeholder="添加包厢类型描述"></textarea>
+            <textarea rows="10" class="form-control" id="addBoxTypeDesc" placeholder="添加包厢类型描述"></textarea>
         </div>
     </div>
     <div class="form-group">
         <div class="col-sm-offset-6">
-            <button type="button" class="btn btn-success">提交</button>
+            <button type="button" class="btn btn-success" id="updateBoxTypeDescBtn">提交</button>
         </div>
     </div>
 </form>
+
+<script>
+    $(document).ready(function () {
+        $("#updateBoxTypeDescBtn").click(function () {
+            $.post("/updateBoxTypeDescription", {
+                id: $("#updateBoxTypeDesc").val(),
+                desc: $("#addBoxTypeDesc").val()
+            }).success(function (data) {
+                if (data.result === 'success') {
+                    alert("修改成功");
+                }
+                else {
+                    alert("修改失败");
+                }
+            })
+        })
+    })
+</script>

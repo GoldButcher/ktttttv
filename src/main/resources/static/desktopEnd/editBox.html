@@ -1,6 +1,6 @@
 <ol class="breadcrumb">
     <li><a href="javascript:void(0)">主菜单</a></li>
-    <li>添加包厢</li>
+    <li>修改包厢</li>
 </ol>
 <form class="form-horizontal addBoxType">
     <div class="form-group">
@@ -55,30 +55,47 @@
     </div>
     <div class="form-group">
         <div class="col-sm-offset-6">
-            <button type="button" class="btn btn-success" id="addBoxBtn">提交</button>
+            <button type="button" class="btn btn-success" id="editBoxBtn">提交</button>
         </div>
     </div>
 </form>
 
 <script>
+    function loadBox(eb) {
+        $.get("/getBoxInfo", {boxInfoId: eb}).success(function (box) {
+            $("#addBoxNum").val(box.boxNo);
+            $("#addBoxName").val(box.boxName);
+            $("#addBoxStatus").val(box.status);
+            $("#addBoxPrice").val(box.price);
+            $("#addBoxDesc").val(box.boxInfoDescription);
+            $("#addBoxNotice").val(box.notice);
+            $("#addBoxType").val(box.boxTypeId)
+        });
+    }
     $(document).ready(function () {
-        $("#addBoxBtn").click(
+        var eb = loadBox(sessionStorage.getItem('eb'));
+        loadBox(eb);
+        $("#editBoxBtn").click(
             function () {
-                $.post("/addBoxInfo", {
+                $.post("/editBoxInfo", {
+                    'boxInfoId': sessionStorage.getItem('eb'),
                     'boxNo': $("#addBoxNum").val(),
                     'boxName': $("#addBoxName").val(),
                     'status': $("#addBoxStatus").val(),
+                    'price': $("#addBoxPrice").val(),
                     'description': $("#addBoxDesc").val(),
                     'notice': $("#addBoxNotice").val(),
                     'boxTypeId': $("#addBoxType").val()
                 }).success(function (data) {
-                    if (data.result === 'success')
-                        alert("添加成功");
+                    if (data.result === 'success') {
+                        alert("修改成功");
+                        loadBox(sessionStorage.getItem('eb'));
+                    }
                     else {
-                        alert("添加失败");
+                        alert("修改失败");
                     }
                 }).fail(function () {
-                    alert("添加失败");
+                    alert("修改失败");
                 })
             }
         )

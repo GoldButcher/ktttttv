@@ -10,9 +10,7 @@ import org.apache.catalina.LifecycleState;
 import org.springframework.data.geo.Box;
 import org.springframework.data.repository.cdi.Eager;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -46,9 +44,9 @@ public class BoxInfoController {
      * @date:2017/1/3 1:02
      **/
     @RequestMapping(value = "/delBoxInfo", method = RequestMethod.POST)
-    public CommonResponseDto delBoxInfo(BoxInfo boxinfo) {
-        Assert.notNull(boxinfo);
-        boxInfoService.delete(boxinfo);
+    public CommonResponseDto delBoxInfo(int id) {
+        BoxInfo byKey = boxInfoService.getByKey(id);
+        boxInfoService.delete(byKey);
         return CommonResponseUtil.successWithNull();
     }
 
@@ -66,6 +64,7 @@ public class BoxInfoController {
         oldBoxInfo.setBoxName(boxInfo.getBoxName());
         oldBoxInfo.setBoxTypeId(boxInfo.getBoxTypeId());
         oldBoxInfo.setBoxNo(boxInfo.getBoxNo());
+        oldBoxInfo.setPrice(boxInfo.getPrice());
         oldBoxInfo.setNotice(boxInfo.getNotice());
         oldBoxInfo.setStatus(boxInfo.getStatus());
         boxInfoService.update(boxInfo);
@@ -80,7 +79,6 @@ public class BoxInfoController {
      **/
     @RequestMapping(value = "/getBoxInfo", method = RequestMethod.GET)
     public BoxInfoDto getBoxInfo(int boxInfoId) {
-        Assert.notNull(boxInfoId);
         return boxInfoService.getBoxInfo(boxInfoId);
     }
 
@@ -107,13 +105,43 @@ public class BoxInfoController {
     }
 
     /**
+     * @title:分页
+     */
+    @GetMapping(value = "getBoxListPaging/{typeId}//{page}/{num}")
+    public List<BoxInfoDto> boxListPaging(@PathVariable int typeId, @PathVariable int page, @PathVariable int num) {
+        if (typeId <= 1)
+            typeId = 1;
+        if (num < 0)
+            num = 0;
+        List<BoxInfoDto> allBoxes = getAllBoxListsByTypeId(typeId);
+        if (page * num > allBoxes.size() && page * num - num < allBoxes.size()) {
+            return allBoxes.subList(page * num - num, allBoxes.size());
+        } else if (page * num <= allBoxes.size()) {
+            return allBoxes.subList(page * num - num, page * num);
+        } else {
+            return allBoxes.subList(0, 0);
+        }
+
+    }
+
+    /**
      * @title:获取指定用户预定的所有包厢
      * @user:admin
      * @return:java.util.List<ktv.dto.ListBoxDto>
      * @date:2017/1/8 14:58
      **/
-    @RequestMapping(value = "getAllBoxListsByTelephone",method = RequestMethod.GET)
+    @RequestMapping(value = "getAllBoxListsByTelephone", method = RequestMethod.GET)
     public List<ListBoxDto> getAllBoxListsByTelephone(String telephone) {
         return boxInfoService.getAllBoxListsByTelephone(telephone);
     }
+
+    @PostMapping("/changeBoxStatus/{id}")
+    public CommonResponseDto changeBoxStatus(@PathVariable int id) {
+        System.out.println(id);
+        BoxInfo box = boxInfoService.getByKey(id);
+        box.setStatus(1 - box.getStatus());
+        boxInfoService.update(box);
+        return CommonResponseUtil.successWithNull();
+    }
+
 }
