@@ -39,6 +39,8 @@
             <th>包厢状态</th>
             <th>付款方式</th>
             <th>联系人</th>
+            <th>联系人姓名</th>
+            <th>用户备注</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -172,7 +174,9 @@
             $("#bookTelPhone").empty();
         });
         $td5.html($btn);
-        $tr.append($th).append($td1).append($td2).append($td3).append($td4).append($td5);
+        $tr.append($th).append($td1).append($td2).append($td3).append($td4);
+        $tr.append($("<td></td>").append(array[i].boxBookUserName));
+        $tr.append($("<td></td>").append(array[i].boxBookDescription)).append($td5);
         $tr.hide();
         return {tr: $tr, payment: array[i].payment};
     }
@@ -201,8 +205,10 @@
             $("select#bookPayment").val(1);
         });
         $td5.html($btn);
-        $tr.append($th).append($td1).append($td2).append($td3).append($td4).append($td5);
-        $tr.hide();
+
+        $tr.append($th).append($td1).append($td2).append($td3).append($td4);
+        $tr.append($("<td></td>").append('无'));
+        $tr.append($("<td></td>").append('无')).append($td5);
         return $tr;
     }
     var findItemNum = function (boxNo, array) {
