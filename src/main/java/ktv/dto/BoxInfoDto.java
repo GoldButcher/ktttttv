@@ -13,12 +13,9 @@ public class BoxInfoDto {
     private Integer boxTypeId;
     private String name;
     private String boxTypeDescription;
-    private String userName;
-    private String description;
     public BoxInfoDto(){}
 
-
-    public BoxInfoDto(Integer boxInfoId, String boxNo, String boxName, Integer status, String boxInfoDescription, String notice, Integer boxTypeId, String name, String boxTypeDescription, String userName, String description) {
+    public BoxInfoDto(Integer boxInfoId, String boxNo, String boxName, Integer status, String boxInfoDescription, String notice, Integer boxTypeId, String name, String boxTypeDescription) {
         this.boxInfoId = boxInfoId;
         this.boxNo = boxNo;
         this.boxName = boxName;
@@ -28,24 +25,6 @@ public class BoxInfoDto {
         this.boxTypeId = boxTypeId;
         this.name = name;
         this.boxTypeDescription = boxTypeDescription;
-        this.userName = userName;
-        this.description = description;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Integer getBoxInfoId() {

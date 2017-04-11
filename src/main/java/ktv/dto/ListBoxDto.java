@@ -20,9 +20,13 @@ public class ListBoxDto {
     private Integer boxNum;
     private Integer leftBoxNum;
     private String telphone;
+    private String boxBookUserName;
+    private String boxBookDescription;
+
+
     public ListBoxDto() {}
 
-    public ListBoxDto(Integer boxBookId, String orderDate, Integer boxBookStatus, Integer boxInfoId, Integer payment, String boxNo, String boxName, Integer boxStatus, String boxDescription, String boxNotice, Integer boxTypeId, String boxTypeName, String boxTypeDescription, Integer boxNum, Integer leftBoxNum, String telphone) {
+    public ListBoxDto(Integer boxBookId, String orderDate, Integer boxBookStatus, Integer boxInfoId, Integer payment, String boxNo, String boxName, Integer boxStatus, String boxDescription, String boxNotice, Integer boxTypeId, String boxTypeName, String boxTypeDescription, Integer boxNum, Integer leftBoxNum, String telphone, String boxBookUserName, String boxBookDescription) {
         this.boxBookId = boxBookId;
         this.orderDate = orderDate;
         this.boxBookStatus = boxBookStatus;
@@ -39,6 +43,24 @@ public class ListBoxDto {
         this.boxNum = boxNum;
         this.leftBoxNum = leftBoxNum;
         this.telphone = telphone;
+        this.boxBookUserName = boxBookUserName;
+        this.boxBookDescription = boxBookDescription;
+    }
+
+    public String getBoxBookUserName() {
+        return boxBookUserName;
+    }
+
+    public void setBoxBookUserName(String boxBookUserName) {
+        this.boxBookUserName = boxBookUserName;
+    }
+
+    public String getBoxBookDescription() {
+        return boxBookDescription;
+    }
+
+    public void setBoxBookDescription(String boxBookDescription) {
+        this.boxBookDescription = boxBookDescription;
     }
 
     public Integer getBoxBookId() {

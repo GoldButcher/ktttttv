@@ -35,7 +35,7 @@ public class BoxBookController {
      **/
     @RequestMapping(value = "/bookBox", method = RequestMethod.POST)
     public CommonResponseDto bookBox(String date, String boxNo, String weixin, String telephone, int payment,String username,String description) {
-        return boxBookInfoService.bookBox(date, boxNo, weixin, telephone, payment);
+        return boxBookInfoService.bookBox(date, boxNo, weixin, telephone, payment,username,description);
     }
 
     /**
@@ -56,10 +56,10 @@ public class BoxBookController {
      * @date:2017/1/8 14:57
      **/
     @RequestMapping(value = "/bookBoxFromWeixin",method = RequestMethod.POST)
-    public CommonResponseDto bookBoxFromWeixin(String date, int typeId, String weixin, String telephone){
+    public CommonResponseDto bookBoxFromWeixin(String date, int typeId, String weixin, String telephone,String userName,String description){
         BoxInfo boxInfo = boxInfoService.getEmptyBox(date,typeId);
         if(boxInfo == null) return CommonResponseUtil.errorWithObj("包厢已经全部预定完!");
-        return boxBookInfoService.bookBox(date,boxInfo.getBoxNo(),weixin,telephone,2);
+        return boxBookInfoService.bookBox(date,boxInfo.getBoxNo(),weixin,telephone,2,userName,description);
     }
 
     /**

@@ -40,7 +40,7 @@ public class BoxBookInfoDaoImpl extends AbstractDaoImpl<Integer, BoxBookInfo> im
     @Override
     public List<PersonOrderDto> getBookInfoFromWeixin(String weixin) {
         String sql = "SELECT bb.orderDate AS orderDate,bt.name AS boxTypeName,bf.price AS price, bf.boxNo AS boxNo"
-                +" ,cs.telephone AS telephone ,bb.userName AS userName,bb.description AS description"
+                +" ,cs.telephone AS telephone"
                 +"FROM BoxBookInfo bb , BoxInfo bf,Customer cs,BoxType bt WHERE"
                 +" bb.boxInfoId = bf.boxInfoId and bf.boxTypeId = bt.boxTypeId AND bb.customerId = cs.customerId and cs.weixin =:weixin ORDER BY bb.orderDate DESC ";
         Query query = getSession().createSQLQuery(sql).setResultTransformer(Transformers.aliasToBean(PersonOrderDto.class));
