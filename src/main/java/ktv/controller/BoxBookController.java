@@ -87,8 +87,8 @@ public class BoxBookController {
 
 
     @PostMapping("/changePayMethod")
-    public CommonResponseDto changeBoxPayment(int method, int id) {
-        BoxBookInfo box = boxBookInfoService.getByKey(id);
+    public CommonResponseDto changeBoxPayment(int method, int boxNo) {
+        BoxBookInfo box = boxBookInfoService.getByKey(boxNo);
         box.setPayment(method);
         boxBookInfoService.update(box);
         return CommonResponseUtil.successWithNull();

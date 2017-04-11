@@ -93,7 +93,7 @@
         </dt>
         <dd class="am-accordion-bd am-collapse am-in">
             <div class="am-accordion-content">
-                <span class="price">￥80元</span>
+                <span class="price">null</span>
                 <span class="bookNow">立即预定</span>
             </div>
         </dd>
@@ -105,32 +105,8 @@
             <span>包厢介绍</span>
         </dt>
         <dd class="am-accordion-bd am-collapse am-in">
-            <div class="am-accordion-content">
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
-                介绍 <br>
+            <div class="am-accordion-content" id="boxTypeDesc">
+
             </div>
         </dd>
     </dl>
@@ -143,7 +119,15 @@
 <script src="assets/js/amazeui.min.js"></script>
 <script src="boxDetail.js"></script>
 <script>
-
+    $(function () {
+        $.get('/getBoxTypeInfo', {id: sessionStorage.getItem("typeId")})
+            .success(function (data) {
+                $("#boxTypeDesc").html(data.description.split(' ').join('<br>'));
+            })
+            .fail(function () {
+                alert("获取包厢信息失败");
+            })
+    })
 </script>
 </body>
 </html>

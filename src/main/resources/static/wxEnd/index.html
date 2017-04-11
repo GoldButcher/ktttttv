@@ -151,16 +151,8 @@
             <span>订购说明</span>
         </dt>
         <dd class="am-accordion-bd am-collapse am-in">
-            <div class="am-accordion-content">
-                说明 <br>
-                说明 <br>
-                说明 <br>
-                说明 <br>
-                说明 <br>
-                说明 <br>
-                说明 <br>
-                说明 <br>
-                说明 <br>
+            <div class="am-accordion-content" id="clubDescription">
+                null
             </div>
         </dd>
     </dl>
@@ -174,12 +166,7 @@
         </dt>
         <dd class="am-accordion-bd am-collapse am-in">
             <div class="am-accordion-content">
-                <span>座机</span><span>0574-12345678</span>
-            </div>
-        </dd>
-        <dd class="am-accordion-bd am-collapse am-in">
-            <div class="am-accordion-content">
-                <span>手机</span><span>1234567890</span>
+                <span>号码</span><span id="clubPhone">null</span>
             </div>
         </dd>
     </dl>
@@ -190,8 +177,8 @@
             <span>地址</span>
         </dt>
         <dd class="am-accordion-bd am-collapse am-in">
-            <div class="am-accordion-content">
-                地址地址地址地址地址地址地址地址地址地址
+            <div class="am-accordion-content" id="clubAddress">
+                null
             </div>
         </dd>
     </dl>
@@ -200,7 +187,22 @@
 <script src="assets/js/amazeui.min.js"></script>
 <script src="index.js"></script>
 <script>
-
+    $(function () {
+        $.get('/shopInfo')
+            .success(function (data) {
+                if (data.result === 'success') {
+                    var company = data.data;
+                    $("#clubAddress").text(company.location);
+                    $("#clubPhone").text(company.fixLinePhone);
+                    $("#clubDescription").text(company.description);
+                } else {
+                    alert("获取信息失败");
+                }
+            })
+            .fail(function () {
+                alert("获取信息失败,请重试");
+            })
+    })
 </script>
 </body>
 </html>
