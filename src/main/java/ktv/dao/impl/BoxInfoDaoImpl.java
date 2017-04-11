@@ -22,7 +22,8 @@ public class BoxInfoDaoImpl extends AbstractDaoImpl<Integer, BoxInfo> implements
                 +"bb.boxInfoId AS boxInfoId , bb.payment AS payment,bf.boxNo AS boxNo,bf.boxName AS boxName,"
                 +"bf.status AS boxStatus,bf.description AS boxDescription,bf.notice AS boxNotice,"
                 +"bf.boxTypeId AS boxTypeId, bt.name AS boxTypeName,bt.description AS boxTypeDescription,bt.boxNum AS boxNum,"
-                +"bt.leftBoxNum AS leftBoxNum ,cs.telephone AS telphone"
+                +"bt.leftBoxNum AS leftBoxNum ,cs.telephone AS telphone,bb.userName AS boxBookUserName,bb.description AS " +
+                "boxBookDescription"
         +"  FROM ((BoxInfo bf LEFT OUTER JOIN BoxType bt ON bf.boxTypeId = bt.boxTypeId)"
                 + " LEFT OUTER JOIN BoxBookInfo bb ON bf.boxInfoId =bb.boxInfoId)LEFT OUTER JOIN Customer cs ON "+
                 "cs.customerId = bb.customerId WHERE "+
