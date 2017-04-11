@@ -59,7 +59,7 @@ public class BoxBookController {
     public CommonResponseDto bookBoxFromWeixin(String date, int typeId, String weixin, String telephone,String userName,String description){
         BoxInfo boxInfo = boxInfoService.getEmptyBox(date,typeId);
         if(boxInfo == null) return CommonResponseUtil.errorWithObj("包厢已经全部预定完!");
-        return boxBookInfoService.bookBox(date,boxInfo.getBoxNo(),weixin,telephone,2,userName,description);
+        return boxBookInfoService.bookBox(date,boxInfo.getBoxNo(),weixin,telephone,1,userName,description);
     }
 
     /**
