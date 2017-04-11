@@ -73,8 +73,7 @@
         });
     }
     $(document).ready(function () {
-        var eb = loadBox(sessionStorage.getItem('eb'));
-        loadBox(eb);
+        loadBox(sessionStorage.getItem('eb'));
         $("#editBoxBtn").click(
             function () {
                 $.post("/editBoxInfo", {

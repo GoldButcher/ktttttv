@@ -3,7 +3,7 @@ var count = 60; //间隔函数，1秒执行
 var curCount;//当前剩余秒数
 
 function SetRemainTime() {
-    if (curCount == 0) {
+    if (curCount === 0) {
         window.clearInterval(InterValObj);// 停止计时器
         $("#getCheck").removeAttr("disabled");// 启用按钮
         $("#getCheck").html("获取验证码");
@@ -49,7 +49,7 @@ $("#logBtn").click(function () {
         dataType:"JSON",
         data:{"checkCode":checkCode},
         success:function (msg) {
-            if(msg.result=="error"){
+            if(msg.result==="error"){
                 alert(msg.data);
             }else{
                 sessionStorage.mobile = $(".mobile").val();

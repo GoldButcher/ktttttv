@@ -35,13 +35,14 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>包厢号</th>
+            <th>包厢名</th>
             <th>包厢状态</th>
             <th>付款方式</th>
             <th>联系人</th>
             <th>联系人姓名</th>
             <th>用户备注</th>
             <th>操作</th>
+            <th>修改付款方式</th>
         </tr>
         </thead>
         <tbody>
@@ -56,6 +57,37 @@
         <li><a href="javascript:void (0)" id="nextPage">下一页</a></li>
     </ul>
 </nav>
+<div class="modal fade" id="payMethodModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改付款方式</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="boxBookIdCancel" class="control-label"></label>
+                        <input type="text" class="form-control" id="payMethodBoxId" placeholder="修改包厢信息" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="changeBookPayment" class="control-label"></label>
+                        <select name="payment" id="changeBookPayment" class="form-control">
+                            <option value="1">暂不支付</option>
+                            <option value="2">微信</option>
+                            <option value="3">现金</option>
+                            <option value="4">刷卡</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="modifyPayMethodBtn">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="bookModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -79,8 +111,16 @@
                         <input type="text" class="form-control" id="boxBookDate" placeholder="预定时间" readonly>
                     </div>
                     <div class="form-group">
+                        <label for="addBoxUserName" class="control-label"></label>
+                        <input type="text" class="form-control" id="addBoxUserName" placeholder="用户姓名">
+                    </div>
+                    <div class="form-group">
                         <label for="bookTelPhone" class="control-label"></label>
                         <input type="text" class="form-control" id="bookTelPhone" placeholder="手机号">
+                    </div>
+                    <div class="form-group">
+                        <label for="userComment" class="control-label"></label>
+                        <input type="text" class="form-control" id="userComment" placeholder="用户需求">
                     </div>
                     <div class="form-group">
                         <label for="bookPayment" class="control-label"></label>
@@ -159,7 +199,7 @@
         var $td3 = $("<td></td>");
         var $td4 = $("<td></td>");
         var $td5 = $("<td></td>");
-        $td1.html(array[i].boxNo);
+        $td1.html(array[i].boxInfoId);
         $td2.html("已预订");
         $td3.html(payMent[array[i].payment - 1]);
         $td4.html(array[i].telphone);
@@ -177,9 +217,17 @@
         $tr.append($th).append($td1).append($td2).append($td3).append($td4);
         $tr.append($("<td></td>").append(array[i].boxBookUserName));
         $tr.append($("<td></td>").append(array[i].boxBookDescription)).append($td5);
+        var changePayMethodBtn = $("<button class='btn btn-info btn-xs'>修改付款方式</button>");
+        changePayMethodBtn.attr("data-boxId", array[i].boxInfoId);
+        changePayMethodBtn.click(function () {
+            $("#payMethodModal").modal();
+            $("#payMethodBoxId").val(array[i].boxName).attr('data-boxInfoId', array[i].boxBookId);
+        });
+        $tr.append($('<td></td>').append(changePayMethodBtn));
         $tr.hide();
         return {tr: $tr, payment: array[i].payment};
     }
+
     function trGenertorNo(i, array) {
         var $tr = $("<tr></tr>");
         var $th = $("<th scope='row'></th>");
@@ -189,7 +237,7 @@
         var $td3 = $("<td></td>");
         var $td4 = $("<td></td>");
         var $td5 = $("<td></td>");
-        $td1.html(array[i].boxNo);
+        $td1.html(array[i].boxInfoId);
         $td2.html("未预定");
         $td3.html("无");
         $td4.html("无");
@@ -205,10 +253,10 @@
             $("select#bookPayment").val(1);
         });
         $td5.html($btn);
-
         $tr.append($th).append($td1).append($td2).append($td3).append($td4);
         $tr.append($("<td></td>").append('无'));
-        $tr.append($("<td></td>").append('无')).append($td5);
+        $tr.append($("<td></td>").append('无')).append($td5).append($('<td></td>').append("无"));
+
         return $tr;
     }
     var findItemNum = function (boxNo, array) {
@@ -305,19 +353,22 @@
         var boxDate = $("#boxBookDate").val();
         var boxPhone = $("#bookTelPhone").val();
         var payment = $("#bookPayment").val() || 1;
+        var userName = $("#addBoxUserName").val();
+        var userCom = $("#userComment").val();
         $.ajax({
             url: '/bookBox',
             method: "POST",
             data: {
-                'date': boxDate,
-                'boxNo': boxId,
-                'weixin': '',
-                'telephone': boxPhone,
-                'payment': payment
+                date: boxDate,
+                boxNo: boxId,
+                weixin: '',
+                telephone: boxPhone,
+                payment: payment,
+                username: userName,
+                description: userCom
             }
         }).done(function (info) {
             if (info.result === 'success') {
-                console.log("success");
             }
             else {
                 console.log("failed");
@@ -370,6 +421,23 @@
             $("#paySelect").val(0).attr('disabled', 'disabled');
         }
     });
+    $("#modifyPayMethodBtn").click(function () {
+        var payMethod = $("#changeBookPayment").val();
+        var boxNo = $("#payMethodBoxId").attr('data-boxInfoId');
+        console.log(boxNo);
+        $.post("/changePayMethod", {method: payMethod, boxNo: boxNo})
+            .success(function () {
+                $("tbody").empty();
+                getAllBoxList($("#boxTypeName").attr("data-ti"), $("#dateSelect").val(), 2, num, parseInt($("#pageNum").attr("data-pageNum")), parseInt($("#bookStatus").val()), $("#paySelect").val());
+            })
+            .fail(function () {
+                alert("更新失败");
+            })
+            .always(function () {
+                $("#payMethodModal").modal('hide');
+            });
+    });
     $("#dateSelect").val(nowDate());
     getAllBoxList($("#boxTypeName").attr("data-ti"), $("#dateSelect").val(), 2, num, parseInt($("#pageNum").attr("data-pageNum")), parseInt($("#bookStatus").val()));
+
 </script>

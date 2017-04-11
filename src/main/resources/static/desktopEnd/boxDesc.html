@@ -15,11 +15,18 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="modifyBoxTypePrice" class="col-sm-3 control-label">包厢价格</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="modifyBoxTypePrice" placeholder="包厢价格">
+        </div>
+    </div>
+    <div class="form-group">
         <label for="addBoxTypeDesc" class="col-sm-3 control-label">包厢描述</label>
         <div class="col-sm-6">
             <textarea rows="10" class="form-control" id="addBoxTypeDesc" placeholder="添加包厢类型描述"></textarea>
         </div>
     </div>
+
     <div class="form-group">
         <div class="col-sm-offset-6">
             <button type="button" class="btn btn-success" id="updateBoxTypeDescBtn">提交</button>
@@ -32,7 +39,8 @@
         $("#updateBoxTypeDescBtn").click(function () {
             $.post("/updateBoxTypeDescription", {
                 id: $("#updateBoxTypeDesc").val(),
-                desc: $("#addBoxTypeDesc").val()
+                desc: $("#addBoxTypeDesc").val(),
+                newPrice: $("#modifyBoxTypePrice").val()
             }).success(function (data) {
                 if (data.result === 'success') {
                     alert("修改成功");

@@ -67,7 +67,7 @@ public class BoxInfoController {
         oldBoxInfo.setPrice(boxInfo.getPrice());
         oldBoxInfo.setNotice(boxInfo.getNotice());
         oldBoxInfo.setStatus(boxInfo.getStatus());
-        boxInfoService.update(boxInfo);
+        boxInfoService.update(oldBoxInfo);
         return CommonResponseUtil.successWithNull();
     }
 
@@ -143,5 +143,6 @@ public class BoxInfoController {
         boxInfoService.update(box);
         return CommonResponseUtil.successWithNull();
     }
+
 
 }

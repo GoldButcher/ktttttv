@@ -29,9 +29,8 @@ public class BoxTypeController {
      * @return:ktv.dto.CommonResponseDto
      * @date:2017/1/2 23:27
      **/
-    @RequestMapping(value = "/addBoxTypeInfo",method = RequestMethod.POST)
-    public CommonResponseDto addBoxTypeInfo(BoxType boxType)
-    {
+    @RequestMapping(value = "/addBoxTypeInfo", method = RequestMethod.POST)
+    public CommonResponseDto addBoxTypeInfo(BoxType boxType) {
         Assert.notNull(boxType);
         boxTypeService.sava(boxType);
         return CommonResponseUtil.successWithNull();
@@ -43,9 +42,8 @@ public class BoxTypeController {
      * @return:ktv.dto.CommonResponseDto
      * @date:2017/1/2 23:46
      **/
-    @RequestMapping(value = "/updateBoxTypeInfo",method = RequestMethod.POST)
-    public CommonResponseDto updateBoxTypeInfo(BoxType newBoxType)
-    {
+    @RequestMapping(value = "/updateBoxTypeInfo", method = RequestMethod.POST)
+    public CommonResponseDto updateBoxTypeInfo(BoxType newBoxType) {
         Assert.notNull(newBoxType);
         BoxType oldBoxType = boxTypeService.getByKey(newBoxType.getBoxTypeId());
         oldBoxType.setBoxNum(newBoxType.getBoxNum());
@@ -64,13 +62,13 @@ public class BoxTypeController {
      **/
 
     @PostMapping(value = "/updateBoxTypeDescription")
-    public CommonResponseDto updateBoxTypeDesc(int id,String desc){
+    public CommonResponseDto updateBoxTypeDesc(int id, String desc, double newPrice) {
         BoxType newBoxType = boxTypeService.getByKey(id);
         newBoxType.setDescription(desc);
+        newBoxType.setPrice(newPrice);
         boxTypeService.update(newBoxType);
         return CommonResponseUtil.successWithNull();
     }
-
 
 
     /**
@@ -79,9 +77,8 @@ public class BoxTypeController {
      * @return:ktv.dto.CommonResponseDto
      * @date:2017/1/2 23:50
      **/
-    @RequestMapping(value = "/delBoxTypeInfo",method = RequestMethod.POST)
-    public CommonResponseDto delBoxTypeInfo(BoxType boxType)
-    {
+    @RequestMapping(value = "/delBoxTypeInfo", method = RequestMethod.POST)
+    public CommonResponseDto delBoxTypeInfo(BoxType boxType) {
         Assert.notNull(boxType);
         boxTypeService.delete(boxType);
         return CommonResponseUtil.successWithNull();
@@ -93,9 +90,8 @@ public class BoxTypeController {
      * @return:ktv.model.BoxType
      * @date:2017/1/3 0:12
      **/
-    @RequestMapping(value = "/getBoxTypeInfo",method = RequestMethod.GET)
-    public BoxType getBoxTypeInfo(int id)
-    {
+    @RequestMapping(value = "/getBoxTypeInfo", method = RequestMethod.GET)
+    public BoxType getBoxTypeInfo(int id) {
         Assert.notNull(id);
         return boxTypeService.getByKey(id);
     }
@@ -106,9 +102,8 @@ public class BoxTypeController {
      * @return:ktv.dto.CommonResponseDto
      * @date:2017/1/8 14:59
      **/
-    @RequestMapping(value = "/getAllBoxTypeInfo",method = RequestMethod.GET)
-    public CommonResponseDto getAllBoxTypeInfo()
-    {
+    @RequestMapping(value = "/getAllBoxTypeInfo", method = RequestMethod.GET)
+    public CommonResponseDto getAllBoxTypeInfo() {
         List<BoxType> boxTypes = boxTypeService.getAll();
         return CommonResponseUtil.successWithObj(boxTypes);
     }

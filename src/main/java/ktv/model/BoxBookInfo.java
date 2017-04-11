@@ -16,9 +16,10 @@ public class BoxBookInfo {
     private String userName;//下单用户姓名
     private String description;//订单备注
 
-    public BoxBookInfo() {}
+    public BoxBookInfo() {
+    }
 
-    public BoxBookInfo(String orderDate, int status, Integer customerId, int boxInfoId, int payment,String userName,String description) {
+    public BoxBookInfo(String orderDate, int status, Integer customerId, int boxInfoId, int payment, String userName, String description) {
         this.orderDate = orderDate;
         this.status = status;
         this.customerId = customerId;
@@ -28,9 +29,13 @@ public class BoxBookInfo {
         this.description = description;
     }
 
-    public String getOrderDate() {return orderDate;}
+    public String getOrderDate() {
+        return orderDate;
+    }
 
-    public void setOrderDate(String orderDate) {this.orderDate = orderDate;}
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
+    }
 
     public int getStatus() {
         return status;
@@ -69,9 +74,13 @@ public class BoxBookInfo {
     }
 
 
-    public int getPayment() {return payment;}
+    public int getPayment() {
+        return payment;
+    }
 
-    public void setPayment(int payment) {this.payment = payment;}
+    public void setPayment(int payment) {
+        this.payment = payment;
+    }
 
     public String getUserName() {
         return userName;
@@ -87,5 +96,19 @@ public class BoxBookInfo {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "BoxBookInfo{" +
+                "id=" + id +
+                ", orderDate='" + orderDate + '\'' +
+                ", status=" + status +
+                ", customerId=" + customerId +
+                ", boxInfoId=" + boxInfoId +
+                ", payment=" + payment +
+                ", userName='" + userName + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
