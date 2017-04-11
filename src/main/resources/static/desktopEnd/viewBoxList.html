@@ -31,7 +31,7 @@
 </nav>
 <script>
     function generateItem(index, value, base) {
-        var arrStatus = ['禁止', '启用'];
+        var arrStatus = ['禁用', '启用'];
         var arrBoxType = ['豪华包厢', '大包厢', '中包厢', '小包厢'];
         var $tr = $('<tr></tr>');
         $tr.append($('<td></td>').html(index + base));
@@ -113,3 +113,5 @@
     });
     loadBoxList(1);
 </script>
+
+
