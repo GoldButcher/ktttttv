@@ -35,7 +35,7 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>包厢号</th>
+            <th>包厢名</th>
             <th>包厢状态</th>
             <th>付款方式</th>
             <th>联系人</th>
@@ -83,7 +83,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="modifyPayMethod">确认</button>
+                <button type="button" class="btn btn-primary" id="modifyPayMethodBtn">确认</button>
             </div>
         </div>
     </div>
@@ -199,7 +199,7 @@
         var $td3 = $("<td></td>");
         var $td4 = $("<td></td>");
         var $td5 = $("<td></td>");
-        $td1.html(array[i].boxNo);
+        $td1.html(array[i].boxName);
         $td2.html("已预订");
         $td3.html(payMent[array[i].payment - 1]);
         $td4.html(array[i].telphone);
@@ -221,7 +221,7 @@
         changePayMethodBtn.attr("data-boxId", array[i].boxInfoId);
         changePayMethodBtn.click(function () {
             $("#payMethodModal").modal();
-            sessionStorage.setItem('cpm', changePayMethodBtn.attr('data-boxId'));
+            $("#payMethodBoxId").val(array[i].boxName).attr('data-boxInfoId', array[i].boxInfoId);
         });
         $tr.append($('<td></td>').append(changePayMethodBtn));
         $tr.hide();
@@ -237,7 +237,7 @@
         var $td3 = $("<td></td>");
         var $td4 = $("<td></td>");
         var $td5 = $("<td></td>");
-        $td1.html(array[i].boxNo);
+        $td1.html(array[i].boxName);
         $td2.html("未预定");
         $td3.html("无");
         $td4.html("无");
@@ -255,12 +255,8 @@
         $td5.html($btn);
         $tr.append($th).append($td1).append($td2).append($td3).append($td4);
         $tr.append($("<td></td>").append('无'));
-        var changePayMethodBtn = $("<button class='btn btn-info btn-xs'>修改付款方式</button>");
-        changePayMethodBtn.click(function () {
-            changePayMethodBtn.attr('data-boxId',array[i].boxInfoId);
-            $("#payMethodModal").modal();
-        });
-        $tr.append($("<td></td>").append('无')).append($td5).append($('<td></td>').append(changePayMethodBtn));
+        $tr.append($("<td></td>").append('无')).append($td5).append($('<td></td>').append("无"));
+
         return $tr;
     }
     var findItemNum = function (boxNo, array) {
@@ -424,6 +420,21 @@
         else {
             $("#paySelect").val(0).attr('disabled', 'disabled');
         }
+    });
+    $("#modifyPayMethodBtn").click(function () {
+        var payMethod = $("#changeBookPayment").val();
+        var payBoxId = $("#payMethodBoxId").attr("data-boxInfoId");
+        $.post("/changePayMethod", {method: payMethod, id: payBoxId})
+            .success(function () {
+                $("tbody").empty();
+                getAllBoxList($("#boxTypeName").attr("data-ti"), $("#dateSelect").val(), 2, num, parseInt($("#pageNum").attr("data-pageNum")), parseInt($("#bookStatus").val()), $("#paySelect").val());
+            })
+            .fail(function () {
+                alert("更新失败");
+            })
+            .always(function () {
+                $("#payMethodModal").modal('hide');
+            });
     });
     $("#dateSelect").val(nowDate());
     getAllBoxList($("#boxTypeName").attr("data-ti"), $("#dateSelect").val(), 2, num, parseInt($("#pageNum").attr("data-pageNum")), parseInt($("#bookStatus").val()));

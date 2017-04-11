@@ -59,14 +59,14 @@ public class BoxInfoController {
     @RequestMapping(value = "/editBoxInfo", method = RequestMethod.POST)
     public CommonResponseDto updateBoxInfo(BoxInfo boxInfo) {
         Assert.notNull(boxInfo);
-        BoxInfo oldBoxInfo = boxInfoService.getByKey(boxInfo.getBoxInfoId());
-        oldBoxInfo.setDescription(boxInfo.getDescription());
-        oldBoxInfo.setBoxName(boxInfo.getBoxName());
-        oldBoxInfo.setBoxTypeId(boxInfo.getBoxTypeId());
-        oldBoxInfo.setBoxNo(boxInfo.getBoxNo());
-        oldBoxInfo.setPrice(boxInfo.getPrice());
-        oldBoxInfo.setNotice(boxInfo.getNotice());
-        oldBoxInfo.setStatus(boxInfo.getStatus());
+//        BoxInfo oldBoxInfo = boxInfoService.getByKey(boxInfo.getBoxInfoId());
+//        oldBoxInfo.setDescription(boxInfo.getDescription());
+//        oldBoxInfo.setBoxName(boxInfo.getBoxName());
+//        oldBoxInfo.setBoxTypeId(boxInfo.getBoxTypeId());
+//        oldBoxInfo.setBoxNo(boxInfo.getBoxNo());
+//        oldBoxInfo.setPrice(boxInfo.getPrice());
+//        oldBoxInfo.setNotice(boxInfo.getNotice());
+//        oldBoxInfo.setStatus(boxInfo.getStatus());
         boxInfoService.update(boxInfo);
         return CommonResponseUtil.successWithNull();
     }
@@ -143,5 +143,6 @@ public class BoxInfoController {
         boxInfoService.update(box);
         return CommonResponseUtil.successWithNull();
     }
+
 
 }

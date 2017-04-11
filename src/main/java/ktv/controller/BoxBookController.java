@@ -8,6 +8,7 @@ import ktv.model.BoxInfo;
 import ktv.service.IBoxBookInfoService;
 import ktv.service.IBoxInfoService;
 import ktv.util.CommonResponseUtil;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,8 +35,8 @@ public class BoxBookController {
      * @date:2017/1/8 14:57
      **/
     @RequestMapping(value = "/bookBox", method = RequestMethod.POST)
-    public CommonResponseDto bookBox(String date, String boxNo, String weixin, String telephone, int payment,String username,String description) {
-        return boxBookInfoService.bookBox(date, boxNo, weixin, telephone, payment,username,description);
+    public CommonResponseDto bookBox(String date, String boxNo, String weixin, String telephone, int payment, String username, String description) {
+        return boxBookInfoService.bookBox(date, boxNo, weixin, telephone, payment, username, description);
     }
 
     /**
@@ -55,11 +56,11 @@ public class BoxBookController {
      * @return:ktv.dto.CommonResponseDto
      * @date:2017/1/8 14:57
      **/
-    @RequestMapping(value = "/bookBoxFromWeixin",method = RequestMethod.POST)
-    public CommonResponseDto bookBoxFromWeixin(String date, int typeId, String weixin, String telephone,String userName,String description){
-        BoxInfo boxInfo = boxInfoService.getEmptyBox(date,typeId);
-        if(boxInfo == null) return CommonResponseUtil.errorWithObj("包厢已经全部预定完!");
-        return boxBookInfoService.bookBox(date,boxInfo.getBoxNo(),weixin,telephone,1,userName,description);
+    @RequestMapping(value = "/bookBoxFromWeixin", method = RequestMethod.POST)
+    public CommonResponseDto bookBoxFromWeixin(String date, int typeId, String weixin, String telephone, String userName, String description) {
+        BoxInfo boxInfo = boxInfoService.getEmptyBox(date, typeId);
+        if (boxInfo == null) return CommonResponseUtil.errorWithObj("包厢已经全部预定完!");
+        return boxBookInfoService.bookBox(date, boxInfo.getBoxNo(), weixin, telephone, 1, userName, description);
     }
 
     /**
@@ -68,7 +69,7 @@ public class BoxBookController {
      * @return:ktv.dto.CommonResponseDto
      * @date:2017/1/8 19:45
      **/
-    @RequestMapping(value = "/getBookInfoFromWeixin",method = RequestMethod.POST)
+    @RequestMapping(value = "/getBookInfoFromWeixin", method = RequestMethod.POST)
     public CommonResponseDto getBookInfoFromWeixin(String weixin) {
         return CommonResponseUtil.successWithObj(boxBookInfoService.getBookInfoFromWeixin(weixin));
     }
@@ -79,9 +80,18 @@ public class BoxBookController {
      * @return:ktv.dto.CommonResponseDto
      * @date:2017/1/8 20:16
      **/
-    @RequestMapping(value = "/payOrder",method = RequestMethod.POST)
-    public CommonResponseDto payOrder(String date,String boxNo,int payment){
-        return boxBookInfoService.payOrder(date,boxNo,payment);
+    @RequestMapping(value = "/payOrder", method = RequestMethod.POST)
+    public CommonResponseDto payOrder(String date, String boxNo, int payment) {
+        return boxBookInfoService.payOrder(date, boxNo, payment);
+    }
+
+
+    @PostMapping("/changePayMethod")
+    public CommonResponseDto changeBoxPayment(int method, int id) {
+        BoxBookInfo box = boxBookInfoService.getByKey(id);
+        box.setPayment(method);
+        boxBookInfoService.update(box);
+        return CommonResponseUtil.successWithNull();
     }
 
 }
