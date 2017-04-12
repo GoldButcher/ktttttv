@@ -83,7 +83,7 @@
         <dd class="am-accordion-bd am-collapse am-in">
             <div class="am-accordion-content">
                 <span>订单时间</span>
-                <span>2017-01-15</span>
+                <span id="orderDate"></span>
             </div>
         </dd>
     </dl>
@@ -93,7 +93,7 @@
         <dd class="am-accordion-bd am-collapse am-in ">
             <div class="am-accordion-content">
                 <span>包厢类型</span>
-                <span>大包厢</span>
+                <span id="boxName"></span>
             </div>
         </dd>
     </dl>
@@ -103,7 +103,7 @@
         <dd class="am-accordion-bd am-collapse am-in">
             <div class="am-accordion-content">
                 <span>价格</span>
-                <span>￥80</span>
+                <span id="boxPrice"></span>
             </div>
         </dd>
     </dl>
@@ -113,7 +113,7 @@
         <dd class="am-accordion-bd am-collapse am-in">
             <div class="am-accordion-content">
                 <span>包厢号</span>
-                <span>777</span>
+                <span id="boxNumber"></span>
             </div>
         </dd>
     </dl>
@@ -123,7 +123,7 @@
         <dd class="am-accordion-bd am-collapse am-in">
             <div class="am-accordion-content">
                 <span>手机号</span>
-                <span>777777777</span>
+                <span id="phone"></span>
             </div>
         </dd>
     </dl>
@@ -134,10 +134,11 @@
 </section>
 <section data-am-widget="accordion" class="am-accordion am-accordion-default aa-delete"
          data-am-accordion='{ "multiple": true }'>
-    <button class="am-btn am-btn-default btn-delete">取消订单</button>
+    <button class="am-btn am-btn-default btn-delete" id="delete">取消订单</button>
 </section>
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/amazeui.min.js"></script>
+<script src="detail.js"></script>
 <script>
     $(function () {
         $(".btn-back").on('click', function () {

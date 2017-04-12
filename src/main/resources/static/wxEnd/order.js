@@ -28,6 +28,7 @@ $(function () {
                     $("#mobilePhone").val('');
                     $("#userName").val('');
                     $(".description").text('');
+                    location.href="index.html";
                 }).fail(function () {
                     alert("server fail");
                 })

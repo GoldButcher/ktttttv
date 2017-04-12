@@ -89,7 +89,6 @@ public class CustomerController {
     @RequestMapping(value = "/getOpenId",method = RequestMethod.GET)
     public CommonResponseDto getOpendId(HttpSession session){
         String openid = (String) session.getAttribute("openid");
-        System.out.println(openid);
         return CommonResponseUtil.successWithObj(openid);
     }
 }

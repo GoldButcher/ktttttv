@@ -5,10 +5,23 @@ $(function () {
     $.ajax({
         "url": "/getOpenId",
         "type": "GET",
+        "async":false,
         success: function (msg) {
-            sessionStorage.setItem("openid", msg.data);
+            if (msg.data != null)
+                sessionStorage.setItem("openid", msg.data);
         }
     });
+
+    $.get("/getOrdersByWeixin", {wx: sessionStorage.getItem('openid')})
+        .success(function (data) {
+            if (data.result === 'success')
+                $("#orderItems").text(data.data.length);
+            else
+                alert("无法获取包厢信息");
+        })
+        .fail(function () {
+            alert("获取包厢信息失败");
+        })
     $(".history").on('click', function () {
 
         location.href = 'history.html';

@@ -20,7 +20,7 @@ public class BoxBookInfoDaoImpl extends AbstractDaoImpl<Integer, BoxBookInfo> im
 
     @Override
     public BoxBookInfo getOrder(String boxNo, String date) {
-        String hql = "select bb from  BoxInfo bf ,BoxBookInfo bb where bf.boxInfoId = bb.boxInfoId " +
+        String hql = "select bb FROM  BoxInfo bf ,BoxBookInfo bb where bf.boxInfoId = bb.boxInfoId " +
                 " and bf.boxNo=:boxNo and bb.orderDate=:orderDate";
         Query query = getSession().createQuery(hql);
         query.setString("boxNo", boxNo).setString("orderDate", date);
@@ -52,7 +52,7 @@ public class BoxBookInfoDaoImpl extends AbstractDaoImpl<Integer, BoxBookInfo> im
 
     @Override
     public List<WxOrder> getOrderByWx(String wx) {
-        String sql = "SELECT BoxInfo.boxName AS boxName,BoxBookInfo.id AS bookId,BoxBookInfo.orderDate AS date ,BoxInfo.boxTypeId AS typeId FROM BoxBookInfo,Customer,BoxInfo WHERE BoxBookInfo.customerId=Customer.customerId AND Customer.weixin=:wx AND BoxInfo.boxInfoId=BoxBookInfo.boxInfoId AND BoxBookInfo.payment = 1 ORDER BY BoxBookInfo.id DESC";
+        String sql = "SELECT BoxInfo.boxName AS boxName,BoxBookInfo.id AS bookId,BoxBookInfo.orderDate AS orderDate ,BoxInfo.boxTypeId AS typeId FROM BoxBookInfo,Customer,BoxInfo WHERE BoxBookInfo.customerId=Customer.customerId AND Customer.weixin=:wx AND BoxInfo.boxInfoId=BoxBookInfo.boxInfoId AND BoxBookInfo.payment = 1 ORDER BY BoxBookInfo.id DESC";
         Query query = getSession().createSQLQuery(sql).setResultTransformer(Transformers.aliasToBean(WxOrder.class));
         query.setString("wx", wx);
         return query.list();
@@ -61,18 +61,11 @@ public class BoxBookInfoDaoImpl extends AbstractDaoImpl<Integer, BoxBookInfo> im
 
     @Override
     public SingleBookBoxById getSingleBookBoxInfo(int id) {
-        String sql = "SELECT\n" +
-                "  Customer.telephone,\n" +
-                "  BoxBookInfo.orderDate,\n" +
-                "  BoxInfo.boxTypeId,\n" +
-                "  BoxInfo.boxName,\n" +
-                "  BoxType.price\n" +
-                "FROM Customer, BoxBookInfo, BoxInfo, BoxType\n" +
-                "WHERE\n" +
-                "  Customer.customerId = BoxBookInfo.customerId AND BoxBookInfo.id =:id AND BoxInfo.boxInfoId = BoxBookInfo.boxInfoId\n" +
-                "  AND BoxInfo.boxTypeId = BoxType.boxTypeId";
+        String sql = "SELECT cs.telephone AS tel,bb.orderDate AS dat, bf.boxNo AS boxNo,bf.boxName AS boxName,bt.price AS price" +
+                " FROM Customer cs,BoxBookInfo bb,BoxInfo bf,BoxType bt WHERE bb.customerId = cs.customerId" +
+                " AND bb.boxInfoId = bf.boxInfoId AND bf.boxTypeId = bt.boxTypeId AND bb.id = :id";
         Query query = getSession().createSQLQuery(sql).setResultTransformer(Transformers.aliasToBean(SingleBookBoxById.class));
-        query.setString("id", String.valueOf(id));
+        query.setInteger("id",id);
         return (SingleBookBoxById) query.list().get(0);
     }
 }

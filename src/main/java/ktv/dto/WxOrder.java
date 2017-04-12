@@ -6,16 +6,17 @@ package ktv.dto;
 public class WxOrder {
     private String boxName;
     private int bookId;
-    private String date;
+    private String orderDate;
     private int typeId;
 
     public WxOrder() {
     }
 
-    public WxOrder(String boxName, int bookId, String date, int typeId) {
+
+    public WxOrder(String boxName, int bookId, String orderDate, int typeId) {
         this.boxName = boxName;
         this.bookId = bookId;
-        this.date = date;
+        this.orderDate = orderDate;
         this.typeId = typeId;
     }
 
@@ -35,12 +36,12 @@ public class WxOrder {
         this.bookId = bookId;
     }
 
-    public String getDate() {
-        return date;
+    public String getOrderDate() {
+        return orderDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
     }
 
     public int getTypeId() {

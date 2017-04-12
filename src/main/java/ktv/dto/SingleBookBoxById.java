@@ -8,20 +8,20 @@ public class SingleBookBoxById {
 
     private String dat;
 
-    private int type;
+    private String boxNo;
 
-    private String name;
+    private String boxName;
 
-    private String price;
+    private double price;
 
     public SingleBookBoxById() {
     }
 
-    public SingleBookBoxById(String tel, String dat, int type, String name, String price) {
+    public SingleBookBoxById(String tel, String dat, String boxNo, String boxName, double price) {
         this.tel = tel;
         this.dat = dat;
-        this.type = type;
-        this.name = name;
+        this.boxNo = boxNo;
+        this.boxName = boxName;
         this.price = price;
     }
 
@@ -41,27 +41,27 @@ public class SingleBookBoxById {
         this.dat = dat;
     }
 
-    public int getType() {
-        return type;
+    public String getBoxNo() {
+        return boxNo;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setBoxNo(String boxNo) {
+        this.boxNo = boxNo;
     }
 
-    public String getName() {
-        return name;
+    public String getBoxName() {
+        return boxName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBoxName(String boxName) {
+        this.boxName = boxName;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 }
