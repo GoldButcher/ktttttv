@@ -80,53 +80,13 @@
     </ul>
 </div>
 <section data-am-widget="accordion" class="am-accordion am-accordion-default" data-am-accordion='{ "multiple": true }'>
-    <dl class="am-accordion-item am-active">
+    <dl class="am-accordion-item am-active" id="wxOrderList">
         <dt class="ycy-title">
             <span>历史记录</span>
             <span>包厢类型</span>
             <span>包厢号</span>
             <span>详情</span>
         </dt>
-        <dd class="am-accordion-bd am-collapse am-in detail">
-            <div class="am-accordion-content">
-                <span>2017-01-08</span>
-                <span>豪华包厢</span>
-                <span>603</span>
-                <span class="boox">查看</span>
-            </div>
-        </dd>
-        <dd class="am-accordion-bd am-collapse am-in detail">
-            <div class="am-accordion-content">
-                <span>2017-01-08</span>
-                <span>豪华包厢</span>
-                <span>603</span>
-                <span class="boox">查看</span>
-            </div>
-        </dd>
-        <dd class="am-accordion-bd am-collapse am-in detail">
-            <div class="am-accordion-content">
-                <span>2017-01-08</span>
-                <span>豪华包厢</span>
-                <span>603</span>
-                <span class="boox">查看</span>
-            </div>
-        </dd>
-        <dd class="am-accordion-bd am-collapse am-in detail">
-            <div class="am-accordion-content">
-                <span>2017-01-08</span>
-                <span>豪华包厢</span>
-                <span>603</span>
-                <span class="boox">查看</span>
-            </div>
-        </dd>
-        <dd class="am-accordion-bd am-collapse am-in detail">
-            <div class="am-accordion-content">
-                <span>2017-01-08</span>
-                <span>豪华包厢</span>
-                <span>603</span>
-                <span class="boox">查看</span>
-            </div>
-        </dd>
     </dl>
 </section>
 <section data-am-widget="accordion" class="am-accordion am-accordion-default aa-back"
@@ -136,12 +96,35 @@
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/amazeui.min.js"></script>
 <script>
-    $(".btn-back").on('click', function () {
-        location.href = 'index.html';
-    });
-    $(".detail").click(function () {
-        location.href = 'detail.html';
-    });
+    $(function () {
+        $(".btn-back").on('click', function () {
+            location.href = 'index.html';
+        });
+        $(".detail").click(function () {
+            location.href = 'detail.html';
+        });
+
+        $.get("/getOrdersByWeixin", {wx: sessionStorage.getItem('openid')})
+            .success(function (data) {
+                if (data.result === 'success') {
+                    var orderList = data.data;
+                    orderList.forEach(function (value, index, arr) {
+                        var boxType = ['豪华包厢', '大包厢', '中包厢', '小包厢'];
+                        var html = "<dd class='am-accordion-bd am-collapse am-in detail'>\n<div class='am-accordion-content'>\n<span>" + value.date + "</span>\n<span>" + boxType[value.typeId] + "</span>\n<span>" + value.boxName + "</span>\n<span class='boox' data-box='" + value.bookId + "'>\u67E5\u770B</span>\n</div>\n</dd>";
+                        $('.boox').on('click', function () {
+                            sessionStorage.setItem("curBox", $(this).attr('data-box'));
+                            location.href = "detail.html";
+                        });
+                        $("#wxOrderList").append($(html));
+                    })
+                }
+                else
+                    alert("无法获取包厢信息");
+            })
+            .fail(function () {
+                alert("服务器错误，获取包厢信息失败");
+            })
+    })
 </script>
 </body>
 </html>

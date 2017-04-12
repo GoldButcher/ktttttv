@@ -1,9 +1,8 @@
 package ktv.service;
 
-import ktv.dto.CommonResponseDto;
-import ktv.dto.ListBoxDto;
-import ktv.dto.PersonOrderDto;
+import ktv.dto.*;
 import ktv.model.BoxBookInfo;
+
 
 import java.util.List;
 
@@ -19,4 +18,8 @@ public interface IBoxBookInfoService extends AbstractService<Integer,BoxBookInfo
     List<PersonOrderDto> getBookInfoFromWeixin(String weixin);
 
     CommonResponseDto payOrder(String date,String boxNo,int payment);
+
+    List<WxOrder> getOrderByWx(String wx);
+
+    SingleBookBoxById getSingleBookBoxInfo(int id);
 }

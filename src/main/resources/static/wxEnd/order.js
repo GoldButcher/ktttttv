@@ -18,13 +18,13 @@ $(function () {
                     "data": {
                         "date": date,
                         "typeId": sessionStorage.getItem("typeId"),
-                        "weixin": "",
+                        "weixin": sessionStorage.getItem('openid')||"",
                         "telephone": telephone,
                         "userName": userName,
                         "description": description
                     }
                 }).done(function (msg) {
-                    alert("下单成功! 您的房间号为" + msg);
+                    alert("下单成功!");
                     $("#mobilePhone").val('');
                     $("#userName").val('');
                     $(".description").text('');

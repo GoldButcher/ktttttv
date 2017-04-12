@@ -4,9 +4,7 @@ import ktv.dao.AbstractDao;
 import ktv.dao.IBoxBookInfoDao;
 import ktv.dao.IBoxInfoDao;
 import ktv.dao.ICustomerDao;
-import ktv.dto.CommonResponseDto;
-import ktv.dto.ListBoxDto;
-import ktv.dto.PersonOrderDto;
+import ktv.dto.*;
 import ktv.model.BoxBookInfo;
 import ktv.model.BoxInfo;
 import ktv.model.Customer;
@@ -98,5 +96,15 @@ public class BoxBookInfoServiceImpl extends AbstractServiceimpl<Integer, BoxBook
         boxBookInfoDao.update(boxBookInfo);
         PersonOrderDto personOrderDto = boxBookInfoDao.getBooxInfo4Order(boxBookInfo);
         return CommonResponseUtil.successWithObj(personOrderDto);
+    }
+
+    @Override
+    public List<WxOrder> getOrderByWx(String wx) {
+        return boxBookInfoDao.getOrderByWx(wx);
+    }
+
+    @Override
+    public SingleBookBoxById getSingleBookBoxInfo(int id) {
+        return boxBookInfoDao.getSingleBookBoxInfo(id);
     }
 }

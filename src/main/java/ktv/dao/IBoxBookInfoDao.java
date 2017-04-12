@@ -1,7 +1,7 @@
 package ktv.dao;
 
-import ktv.dto.ListBoxDto;
 import ktv.dto.PersonOrderDto;
+import ktv.dto.SingleBookBoxById;
 import ktv.model.BoxBookInfo;
 
 import java.util.List;
@@ -15,4 +15,8 @@ public interface IBoxBookInfoDao extends AbstractDao<Integer,BoxBookInfo>{
     PersonOrderDto getBooxInfo4Order(BoxBookInfo boxBookInfo);
 
     List<PersonOrderDto> getBookInfoFromWeixin(String weixin);
+
+    List getOrderByWx(String wx);
+
+    SingleBookBoxById getSingleBookBoxInfo(int id);
 }

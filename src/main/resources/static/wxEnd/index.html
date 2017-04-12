@@ -89,7 +89,7 @@
         <dd class="am-accordion-bd am-collapse am-in history">
             <div class="am-accordion-content">
                 <span>我的订单</span>
-                <span class="boox">5</span>
+                <span class="boox" id="orderItems">null</span>
             </div>
         </dd>
     </dl>
@@ -201,6 +201,16 @@
             })
             .fail(function () {
                 alert("获取信息失败,请重试");
+            });
+        $.get("/getOrdersByWeixin", {wx: sessionStorage.getItem('openid')})
+            .success(function (data) {
+                if (data.result === 'success')
+                    $("#orderItems").text(data.data.length);
+                else
+                    alert("无法获取包厢信息");
+            })
+            .fail(function () {
+                alert("获取包厢信息失败");
             })
     })
 </script>

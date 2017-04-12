@@ -8,10 +8,7 @@ import ktv.model.BoxInfo;
 import ktv.service.IBoxBookInfoService;
 import ktv.service.IBoxInfoService;
 import ktv.util.CommonResponseUtil;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -94,4 +91,18 @@ public class BoxBookController {
         return CommonResponseUtil.successWithNull();
     }
 
+    @GetMapping("/getOrdersByWeixin")
+    public CommonResponseDto getOrderByWeixin(String wx) {
+        return CommonResponseUtil.successWithObj(boxBookInfoService.getOrderByWx(wx));
+    }
+
+    @GetMapping("/getSingleBox")
+    public CommonResponseDto getSingleBox(int id) {
+        return CommonResponseUtil.successWithObj(boxBookInfoService.getByKey(id));
+    }
+
+    @GetMapping("/getSingleBookBoxInfo")
+    public CommonResponseDto getSingleBookBoxInfo(int id) {
+        return CommonResponseUtil.successWithObj(boxBookInfoService.getSingleBookBoxInfo(id));
+    }
 }
