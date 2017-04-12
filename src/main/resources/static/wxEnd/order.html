@@ -118,7 +118,18 @@
 <script src="assets/js/amazeui.min.js"></script>
 <script src="order.js"></script>
 <script>
-
+    var nowDate = function () {
+        var today = new Date();
+        var date = today.getDate().toString();
+        var month = (today.getMonth() + 1).toString();
+        var year = today.getFullYear().toString();
+        if (date.length === 1)
+            date = '0' + date;
+        if (month.length === 1)
+            month = '0' + month;
+        return year + '-' + month + '-' + date;
+    };
+    $("#bookDate").val(nowDate());
 </script>
 </body>
 </html>

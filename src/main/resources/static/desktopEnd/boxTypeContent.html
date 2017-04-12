@@ -35,6 +35,7 @@
         <thead>
         <tr>
             <th>#</th>
+            <th>包厢号</th>
             <th>包厢名</th>
             <th>包厢状态</th>
             <th>付款方式</th>
@@ -214,7 +215,7 @@
             $("#bookTelPhone").empty();
         });
         $td5.html($btn);
-        $tr.append($th).append($td1).append($td2).append($td3).append($td4);
+        $tr.append($th).append($td1).append($("<td></td>").append(array[i].boxName)).append($td2).append($td3).append($td4);
         $tr.append($("<td></td>").append(array[i].boxBookUserName));
         $tr.append($("<td></td>").append(array[i].boxBookDescription)).append($td5);
         var changePayMethodBtn = $("<button class='btn btn-info btn-xs'>修改付款方式</button>");
@@ -253,7 +254,7 @@
             $("select#bookPayment").val(1);
         });
         $td5.html($btn);
-        $tr.append($th).append($td1).append($td2).append($td3).append($td4);
+        $tr.append($th).append($td1).append($("<td></td>").append(array[i].boxName)).append($td2).append($td3).append($td4);
         $tr.append($("<td></td>").append('无'));
         $tr.append($("<td></td>").append('无')).append($td5).append($('<td></td>').append("无"));
 

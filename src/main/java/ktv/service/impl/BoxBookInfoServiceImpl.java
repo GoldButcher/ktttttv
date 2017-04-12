@@ -4,9 +4,7 @@ import ktv.dao.AbstractDao;
 import ktv.dao.IBoxBookInfoDao;
 import ktv.dao.IBoxInfoDao;
 import ktv.dao.ICustomerDao;
-import ktv.dto.CommonResponseDto;
-import ktv.dto.ListBoxDto;
-import ktv.dto.PersonOrderDto;
+import ktv.dto.*;
 import ktv.model.BoxBookInfo;
 import ktv.model.BoxInfo;
 import ktv.model.Customer;
@@ -18,13 +16,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by admin on 2016/12/25.
  */
 @Transactional
 @Service
-public class BoxBookInfoServiceImpl extends AbstractServiceimpl<Integer,BoxBookInfo> implements IBoxBookInfoService{
+public class BoxBookInfoServiceImpl extends AbstractServiceimpl<Integer, BoxBookInfo> implements IBoxBookInfoService {
     @Resource
     private IBoxBookInfoDao boxBookInfoDao;
 
@@ -33,29 +32,29 @@ public class BoxBookInfoServiceImpl extends AbstractServiceimpl<Integer,BoxBookI
 
     @Resource
     private ICustomerDao customerDao;
+
     @Resource
     public void setBoxBookInfoDao(IBoxBookInfoDao boxBookInfoDao) {
         super.setAbstractDao(boxBookInfoDao);
     }
 
     @Override
-    public CommonResponseDto bookBox(String date, String boxNo,String weixin,String telephone,int payment,String username,String description) {
+    public CommonResponseDto bookBox(String date, String boxNo, String weixin, String telephone, int payment, String username, String description) {
 
-        BoxInfo boxInfo = boxInfoDao.getByProperties("boxNo",boxNo);
-        BoxBookInfo boxBookInfo = boxBookInfoDao.getOrder(boxNo,date);
-        if(boxBookInfo != null) return CommonResponseUtil.errorWithObj("该包厢已经被预定！");
-        Customer customer = customerDao.getByProperties("telephone",telephone);
+        BoxInfo boxInfo = boxInfoDao.getByProperties("boxNo", boxNo);
+        BoxBookInfo boxBookInfo = boxBookInfoDao.getOrder(boxNo, date);
+        if (boxBookInfo != null) return CommonResponseUtil.errorWithObj("该包厢已经被预定！");
+        Customer customer = customerDao.getByProperties("telephone", telephone);
         int customerId = 0;
-        if(customer==null)
-        {
+        if (customer == null) {
             customer = new Customer();
             customer.setTelephone(telephone);
-            if(weixin!="")
-            customer.setWeixin(weixin);
+            if (!Objects.equals(weixin, ""))
+                customer.setWeixin(weixin);
             customerId = customerDao.sava(customer);
-        }else{
-            if(weixin!="")
-            customer.setWeixin(weixin);
+        } else {
+            if (!Objects.equals(weixin, ""))
+                customer.setWeixin(weixin);
             customerId = customer.getCustomerId();
             customerDao.update(customer);
         }
@@ -67,17 +66,17 @@ public class BoxBookInfoServiceImpl extends AbstractServiceimpl<Integer,BoxBookI
         boxBookInfo.setPayment(payment);
         boxBookInfo.setUserName(username);
         boxBookInfo.setDescription(description);
-        if(0!=boxBookInfoDao.sava(boxBookInfo))
+        if (0 != boxBookInfoDao.sava(boxBookInfo))
             return CommonResponseUtil.successWithNull();
         return CommonResponseUtil.errorWithObj("系统错误,请稍后再试");
     }
 
     @Override
     public CommonResponseDto cancelBookBox(String date, String boxNo, String telephone) {
-        BoxBookInfo boxBookInfo = boxBookInfoDao.getOrder(boxNo,date);
-        if(boxBookInfo==null) return CommonResponseUtil.errorWithObj("请确认该订单是否存在!");
+        BoxBookInfo boxBookInfo = boxBookInfoDao.getOrder(boxNo, date);
+        if (boxBookInfo == null) return CommonResponseUtil.errorWithObj("请确认该订单是否存在!");
         Customer customer = customerDao.getByKey(boxBookInfo.getCustomerId());
-        if(!customer.getTelephone().equals(telephone.trim())) return CommonResponseUtil.errorWithObj("请填写正确的预留手机号!");
+        if (!customer.getTelephone().equals(telephone.trim())) return CommonResponseUtil.errorWithObj("请填写正确的预留手机号!");
 
         boxBookInfoDao.delete(boxBookInfo);
         return CommonResponseUtil.successWithNull();
@@ -89,13 +88,23 @@ public class BoxBookInfoServiceImpl extends AbstractServiceimpl<Integer,BoxBookI
     }
 
     @Override
-    public CommonResponseDto payOrder(String date, String boxNo,int payment) {
-        BoxBookInfo boxBookInfo = boxBookInfoDao.getOrder(boxNo,date);
-        if(boxBookInfo == null)
+    public CommonResponseDto payOrder(String date, String boxNo, int payment) {
+        BoxBookInfo boxBookInfo = boxBookInfoDao.getOrder(boxNo, date);
+        if (boxBookInfo == null)
             return CommonResponseUtil.errorWithObj("支付失败请稍后再试！");
         boxBookInfo.setPayment(payment);
         boxBookInfoDao.update(boxBookInfo);
         PersonOrderDto personOrderDto = boxBookInfoDao.getBooxInfo4Order(boxBookInfo);
         return CommonResponseUtil.successWithObj(personOrderDto);
+    }
+
+    @Override
+    public List<WxOrder> getOrderByWx(String wx) {
+        return boxBookInfoDao.getOrderByWx(wx);
+    }
+
+    @Override
+    public SingleBookBoxById getSingleBookBoxInfo(int id) {
+        return boxBookInfoDao.getSingleBookBoxInfo(id);
     }
 }
