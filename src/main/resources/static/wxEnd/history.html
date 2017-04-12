@@ -110,12 +110,12 @@
                     var orderList = data.data;
                     orderList.forEach(function (value, index, arr) {
                         var boxType = ['豪华包厢', '大包厢', '中包厢', '小包厢'];
-                        var html = "<dd class='am-accordion-bd am-collapse am-in detail'>\n<div class='am-accordion-content'>\n<span>" + value.date + "</span>\n<span>" + boxType[value.typeId] + "</span>\n<span>" + value.boxName + "</span>\n<span class='boox' data-box='" + value.bookId + "'>\u67E5\u770B</span>\n</div>\n</dd>";
-                        $('.boox').on('click', function () {
-                            sessionStorage.setItem("curBox", $(this).attr('data-box'));
-                            location.href = "detail.html";
-                        });
+                        var html = "<dd class='am-accordion-bd am-collapse am-in detail'>\n<div class='am-accordion-content'>\n<span>" + value.orderDate + "</span>\n<span>" + boxType[value.typeId-1] + "</span>\n<span>" + value.boxName + "</span>\n<span class='boox' data-box='" + value.bookId + "'>\u67E5\u770B</span>\n</div>\n</dd>";
                         $("#wxOrderList").append($(html));
+                        $(".boox").click(function () {
+                            sessionStorage.setItem("curBox", $(this).attr('data-box'));
+                            location.href="detail.html";
+                        })
                     })
                 }
                 else
@@ -124,7 +124,14 @@
             .fail(function () {
                 alert("服务器错误，获取包厢信息失败");
             })
-    })
+    });
+//    $('.boox').click(function () {
+//        alert($(this).attr('data-box'));
+//        sessionStorage.setItem("curBox", $(this).attr('data-box'));
+//
+//        location.href = "detail.html";
+//    })
+
 </script>
 </body>
 </html>
