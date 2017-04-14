@@ -64,34 +64,35 @@ public class ShopServiceImpl extends AbstractServiceimpl<Integer,Shop> implement
             textMessage.setFromUserName(toUserName);
             textMessage.setCreateTime(new Date().getTime());
             textMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
-
-            // 文本消息
-            if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT)) {
-                respContent = "您发送的是文本消息！";
-            }
-            // 图片消息
-            else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
-                respContent = "您发送的是图片消息！";
-            }
-            // 地理位置消息
-            else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_LOCATION)) {
-                respContent = "您发送的是地理位置消息！";
-            }
-            // 链接消息
-            else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_LINK)) {
-                respContent = "您发送的是链接消息！";
-            }
-            // 音频消息
-            else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_VOICE)) {
-                respContent = "您发送的是音频消息！";
-            }
-            // 事件推送
-            else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_EVENT)) {
+//
+//            // 文本消息
+//            if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT)) {
+//                respContent = "您发送的是文本消息！";
+//            }
+//            // 图片消息
+//            else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
+//                respContent = "您发送的是图片消息！";
+//            }
+//            // 地理位置消息
+//            else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_LOCATION)) {
+//                respContent = "您发送的是地理位置消息！";
+//            }
+//            // 链接消息
+//            else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_LINK)) {
+//                respContent = "您发送的是链接消息！";
+//            }
+//            // 音频消息
+//            else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_VOICE)) {
+//                respContent = "您发送的是音频消息！";
+//            }
+//            // 事件推送
+//            else
+                if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_EVENT)) {
                 // 事件类型
                 String eventType = requestMap.get("Event");
                 // 订阅
                 if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
-                    respContent = "谢谢您的关注！,暂时无法测试收藏的表情，请不要乱发哟";
+                    respContent = "谢谢您的关注!";
                 }
                 // 取消订阅
                 else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {
@@ -99,6 +100,7 @@ public class ShopServiceImpl extends AbstractServiceimpl<Integer,Shop> implement
                 } else if(eventType.equals(MessageUtil.EVENT_TYPE_CLICK)){
                     //点击事件
                     String eventKey = requestMap.get("EventKey");
+
                     if(eventKey.equals("KEY_INTRODUCTION")){
                         respContent = shopDao.getAll().get(0).getDescription();
                     }else if (eventKey.equals("KEY_CONNECT")){

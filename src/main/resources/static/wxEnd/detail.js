@@ -33,12 +33,13 @@ $(function () {
         var orderDate = $("#orderDate").html();
         var boxNo = $("#boxNumber").html();
         var telephone = $("#phone").html();
+        var nowDate = getDate();
         if(curBox==null){
             alert("取消失败")
             return ;
         }
-        if(orderDate.trim()==getDate().trim()){
-            alert("无法取消今日订单!");
+        if(orderDate.trim() <= nowDate.trim()){
+            alert("无法取消当日或者更早的订单!");
             return false;
         }
         $.ajax({
