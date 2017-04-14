@@ -46,7 +46,7 @@ public class CustomerController {
      **/
     @RequestMapping(value = "/getAllCustomerByDate", method = RequestMethod.GET)
     public List<CustomerInfoDto> getAllCustomerByDate(String date) {
-        Assert.notNull(date);
+//        Assert.notNull(date);
         return customerService.getAllCustomerByDate(date);
     }
 

@@ -44,7 +44,7 @@ public class ManagerController {
     @RequestMapping(value="/dologin")
     public CommonResponseDto doLogin(HttpServletRequest request, Manager manager)
     {
-        Assert.notNull(manager);
+//        Assert.notNull(manager);
         Boolean result = managerService.doLogin(request,manager);
         if(result)
         {

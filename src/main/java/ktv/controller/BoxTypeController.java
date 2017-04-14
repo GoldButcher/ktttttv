@@ -31,7 +31,7 @@ public class BoxTypeController {
      **/
     @RequestMapping(value = "/addBoxTypeInfo", method = RequestMethod.POST)
     public CommonResponseDto addBoxTypeInfo(BoxType boxType) {
-        Assert.notNull(boxType);
+//        Assert.notNull(boxType);
         boxTypeService.sava(boxType);
         return CommonResponseUtil.successWithNull();
     }
@@ -44,7 +44,7 @@ public class BoxTypeController {
      **/
     @RequestMapping(value = "/updateBoxTypeInfo", method = RequestMethod.POST)
     public CommonResponseDto updateBoxTypeInfo(BoxType newBoxType) {
-        Assert.notNull(newBoxType);
+//        Assert.notNull(newBoxType);
         BoxType oldBoxType = boxTypeService.getByKey(newBoxType.getBoxTypeId());
         oldBoxType.setBoxNum(newBoxType.getBoxNum());
         oldBoxType.setDescription(newBoxType.getDescription());
@@ -79,7 +79,7 @@ public class BoxTypeController {
      **/
     @RequestMapping(value = "/delBoxTypeInfo", method = RequestMethod.POST)
     public CommonResponseDto delBoxTypeInfo(BoxType boxType) {
-        Assert.notNull(boxType);
+//        Assert.notNull(boxType);
         boxTypeService.delete(boxType);
         return CommonResponseUtil.successWithNull();
     }
@@ -92,7 +92,7 @@ public class BoxTypeController {
      **/
     @RequestMapping(value = "/getBoxTypeInfo", method = RequestMethod.GET)
     public BoxType getBoxTypeInfo(int id) {
-        Assert.notNull(id);
+//        Assert.notNull(id);
         return boxTypeService.getByKey(id);
     }
 

@@ -5,11 +5,16 @@ $(function () {
     $("#boxType").val(sessionStorage.getItem("name"));
     $(".orderBtn").click(function () {
             var date = $("#bookDate").val();
-            var telephone = $("#mobilePhone").val();
+            var telephone = $("#mobilePhone").val().trim();
             var userName = $("#userName").val().trim() || "";
             var description = $(".description").text().trim() || "";
-            if (telephone.length < 1)
+            var pattern = /^1[34578]\d{9}$/;
+            if (telephone.length < 1) {
                 alert("请填写手机号");
+            }
+            else if(!pattern.test(telephone)){
+                alert("请填写正确的手机号");
+            }
             else {
                 $.ajax({
                     "url": "/bookBoxFromWeixin",
@@ -24,13 +29,13 @@ $(function () {
                         "description": description
                     }
                 }).done(function (msg) {
-                    alert("下单成功!");
+                    alert("成功预定!");
                     $("#mobilePhone").val('');
                     $("#userName").val('');
                     $(".description").text('');
-                    location.href="index.html";
+                    location.href="history.html";
                 }).fail(function () {
-                    alert("server fail");
+                    alert("预定失败,请重试");
                 })
             }
         }

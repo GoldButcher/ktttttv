@@ -31,7 +31,7 @@ public class BoxInfoController {
      **/
     @RequestMapping(value = "/addBoxInfo", method = RequestMethod.POST)
     public CommonResponseDto addBoxInfo(BoxInfo boxInfo) {
-        Assert.notNull(boxInfo);
+//        Assert.notNull(boxInfo);
 
         boxInfoService.sava(boxInfo);
         return CommonResponseUtil.successWithNull();
@@ -58,7 +58,7 @@ public class BoxInfoController {
      **/
     @RequestMapping(value = "/editBoxInfo", method = RequestMethod.POST)
     public CommonResponseDto updateBoxInfo(BoxInfo boxInfo) {
-        Assert.notNull(boxInfo);
+//        Assert.notNull(boxInfo);
         BoxInfo oldBoxInfo = boxInfoService.getByKey(boxInfo.getBoxInfoId());
         oldBoxInfo.setDescription(boxInfo.getDescription());
         oldBoxInfo.setBoxName(boxInfo.getBoxName());
